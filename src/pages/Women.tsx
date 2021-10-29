@@ -1,5 +1,5 @@
 const Women = () => {
-  return <div></div>;
+  return <div>Women</div>;
 };
 
 export default Women;
