@@ -1,7 +1,11 @@
-import { Fragment } from 'react';
+import { LogoIcon } from './components/icons';
 
 function App() {
-  return <Fragment></Fragment>;
+  return (
+    <div>
+      <LogoIcon />
+    </div>
+  );
 }
 
 export default App;
