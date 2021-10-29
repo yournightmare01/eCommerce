@@ -1,8 +1,11 @@
-import React from 'react';
-import './App.css';
+import { LogoIcon } from './components/icons';
 
 function App() {
-  return <div className='App'></div>;
+  return (
+    <div>
+      <LogoIcon />
+    </div>
+  );
 }
 
 export default App;
