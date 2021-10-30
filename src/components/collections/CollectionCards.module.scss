@@ -1,21 +1,21 @@
 .layout {
   display: grid;
-  margin-top: 20px;
+  margin-top: 2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 1rem;
 
   .cards {
     box-sizing: border-box;
-    border-top: 5px solid var(--color-primary);
-    border-radius: 5px;
+    border-top: 0.5rem solid var(--color-primary);
+    border-radius: 0.5rem;
     width: 100%;
-    padding: 20px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 2px 2px 10px -5px rgba(0, 0, 0, 0.6);
+    box-shadow: 0.2rem 0.2rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
     & > *:not(:last-child) {
-      margin-bottom: 15px;
+      margin-bottom: 1.5rem;
     }
 
     .cost {
@@ -25,34 +25,34 @@
 
       .price {
         font-weight: 700;
-        font-size: 20px;
+        font-size: 2rem;
       }
 
       .discount {
         background: #ffefe2;
         color: var(--color-primary);
         font-weight: 700;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-left: 10px;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        margin-left: 1rem;
       }
     }
 
     .oldPrice {
       font-weight: 500;
-      font-size: 16px;
+      font-size: 1.6rem;
       color: var(--dark-grayish-blue);
       text-decoration: line-through;
       align-self: flex-start;
     }
 
     img {
-      border-radius: 5px;
+      border-radius: 0.5rem;
       width: 100%;
     }
 
     p {
-      font-size: 16px;
+      font-size: 1.6rem;
     }
   }
 }

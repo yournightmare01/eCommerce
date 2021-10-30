@@ -3,9 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid gray;
-  height: 100px;
-  font-size: 16px;
+  border-bottom: 0.2rem solid gray;
+  height: 10rem;
+  font-size: 1.6rem;
   div {
     display: flex;
     align-items: center;
@@ -17,19 +17,29 @@
 
     li {
       &:not(:last-child) {
-        margin-right: 20px;
+        margin-right: 2rem;
       }
       &:first-child {
-        margin-left: 60px;
+        margin-left: 6rem;
       }
       a {
         text-decoration: none;
-        color: black;
+        color: var(--dark-grayish-blue);
+        padding: 3.3rem 1rem;
+        &:hover {
+          color: var(--color-black);
+          border-bottom: 0.4rem solid var(--color-primary);
+        }
       }
     }
   }
   img {
-    height: 50px;
-    margin-left: 50px;
+    height: 5rem;
+    margin-left: 5rem;
+
+    &:hover {
+      border: 0.2rem solid var(--color-primary);
+      border-radius: 50%;
+    }
   }
 }

@@ -20,8 +20,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   max-width: 1440px;
   margin: 0 auto;
+  font-weight: 400;
 }
 
+html {
+  font-size: 62.5%;
+}
 code {
   font-family: 'Kumbh Sans', sans-serif;
 }
