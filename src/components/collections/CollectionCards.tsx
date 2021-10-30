@@ -14,7 +14,7 @@ const CollectionCards = () => {
               <p className={classes.price}>{item.price}</p>
               <p className={classes.discount}>{item.discount}</p>
             </div>
-            <p>{item.oldPrice}</p>
+            <p className={classes.oldPrice}>{item.oldPrice}</p>
           </div>
         );
       })}
