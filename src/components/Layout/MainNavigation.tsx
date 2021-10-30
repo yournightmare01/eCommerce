@@ -4,9 +4,6 @@ import classes from './MainNavigation.module.scss';
 import avatarImg from '../../images/image-avatar.png';
 
 const MainNavigation = () => {
-  const smt = () => {};
-
-  const other = () => {};
   return (
     <nav className={classes.nav}>
       <div>

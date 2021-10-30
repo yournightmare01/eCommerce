@@ -3,8 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid gray;
+  border-bottom: 0.15rem solid gray;
   height: 100px;
+  font-size: 1rem;
   div {
     display: flex;
     align-items: center;
@@ -16,7 +17,10 @@
 
     li {
       &:not(:last-child) {
-        margin-right: 20px;
+        margin-right: 2rem;
+      }
+      &:first-child {
+        margin-left: 5rem;
       }
       a {
         text-decoration: none;
@@ -25,7 +29,7 @@
     }
   }
   img {
-    height: 50px;
-    margin-left: 50px;
+    height: 5rem;
+    margin-left: 5rem;
   }
 }

@@ -1,5 +1,7 @@
+import CollectionCards from '../components/collections/CollectionCards';
+
 const Collections = () => {
-  return <div>Collections</div>;
+  return <CollectionCards />;
 };
 
 export default Collections;
