@@ -3,9 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.2rem solid gray;
-  height: 10rem;
-  font-size: 1.6rem;
+  border-bottom: 2px solid gray;
+  height: 100px;
+  font-size: 16px;
   div {
     display: flex;
     align-items: center;
@@ -17,29 +17,64 @@
 
     li {
       &:not(:last-child) {
-        margin-right: 2rem;
+        margin-right: 20px;
       }
       &:first-child {
-        margin-left: 6rem;
+        margin-left: 60px;
       }
       a {
         text-decoration: none;
-        color: var(--dark-grayish-blue);
-        padding: 3.3rem 1rem;
-        &:hover {
-          color: var(--color-black);
-          border-bottom: 0.4rem solid var(--color-primary);
-        }
+        color: black;
       }
     }
   }
   img {
-    height: 5rem;
-    margin-left: 5rem;
-
-    &:hover {
-      border: 0.2rem solid var(--color-primary);
-      border-radius: 50%;
-    }
+    height: 50px;
+    margin-left: 50px;
   }
+}
+
+.modal {
+  box-sizing: border-box;
+  padding: 7px 0;
+  &::before {
+    position: absolute;
+    transform: rotate(45deg);
+    background-color: #f4f4f4;
+    margin-top: -12.3px;
+    margin-left: 25px;
+
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-left: 0.5px solid black;
+    border-top: 0.5px solid black;
+  }
+  border: 0.5px solid black;
+  margin-left: 2px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  position: absolute;
+  margin-top: 8px;
+  width: 74px;
+  height: fit-content;
+  border-radius: 5px;
+}
+
+.modalText {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0.2rem;
+}
+
+.modalText:hover {
+  background-color: var(--color-primary-light);
+  cursor: pointer;
+}
+
+.colections:hover {
+  cursor: pointer;
 }

@@ -1,16 +1,32 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { CartIcon, LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import avatarImg from '../../images/image-avatar.png';
+import { useState } from 'react';
 
 const MainNavigation = () => {
+  const [shown, setIsShown] = useState(false);
+  const modalToggleHandler = () => {
+    setIsShown(!shown);
+  };
+
   return (
     <nav className={classes.nav}>
       <div>
         <LogoIcon />
         <ul>
-          <li>
-            <NavLink to='collections'>Collections</NavLink>
+          <li onClick={modalToggleHandler}>
+            <Link to='/'>Home</Link>
+            {shown && (
+              <div className={classes.modal}>
+                <span className={classes.modalText}>
+                  <Link to='men'>Man</Link>
+                </span>
+                <span className={classes.modalText}>
+                  <Link to='women'>Women</Link>
+                </span>
+              </div>
+            )}
           </li>
           <li>
             <NavLink to='men'>Men</NavLink>
