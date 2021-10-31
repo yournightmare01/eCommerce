@@ -1,6 +1,6 @@
 import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
-import sneakers from '../../images/image-product-1-thumbnail.jpg';
+import sneakers from '../../images/image-product-1.jpg';
 
 const CollectionCards = () => {
   return (

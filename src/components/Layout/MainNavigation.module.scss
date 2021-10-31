@@ -36,10 +36,12 @@
   img {
     height: 5rem;
     margin-left: 5rem;
+    box-sizing: border-box;
+    border-radius: 50%;
 
     &:hover {
       border: 0.2rem solid var(--color-primary);
-      border-radius: 50%;
+      cursor: pointer;
     }
   }
 }
