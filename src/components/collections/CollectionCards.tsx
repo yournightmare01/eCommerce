@@ -21,20 +21,30 @@ const CollectionCards = () => {
           <div className={classes['filters-div']}>
             <h4> Filter by gender</h4>
             <ArrowDownIcon />
-            <FilterModal filterArray={options1} />
+            <div className={`${classes.genderContainer} ${classes.first}`}>
+              <FilterModal filterArray={options1} />
+            </div>
           </div>
           <div className={classes['filters-div']}>
             <h4>Filter by collection</h4>
             <ArrowDownIcon />
-            <FilterModal filterArray={options2} />
+            <div className={`${classes.genderContainer} ${classes.second}`}>
+              <FilterModal filterArray={options2} />
+            </div>
           </div>
           <div className={classes['filters-div']}>
             <h4>Filter by discount</h4>
             <ArrowDownIcon />
+            <div
+              className={`${classes.genderContainer} ${classes.third}`}
+            ></div>
           </div>
           <div className={classes['filters-div']}>
             <h4>Filter by type</h4>
             <ArrowDownIcon />
+            <div
+              className={`${classes.genderContainer} ${classes.forth}`}
+            ></div>
           </div>
         </div>
 

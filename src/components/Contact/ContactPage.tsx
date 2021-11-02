@@ -163,13 +163,25 @@ const Contact = (props: any) => {
         <div>
           <h2>Marko Tasic</h2>
           <span>
-            <a href='dsa'>
+            <a
+              href='https://github.com/markotasic'
+              target='_blank'
+              rel='noreferrer'
+            >
               <GitHubIcon />
             </a>
-            <a href='dsa'>
+            <a
+              href='https://www.linkedin.com/in/markotasicc/'
+              target='_blank'
+              rel='noreferrer'
+            >
               <LinkedInIcon />
             </a>
-            <a href='dsa'>
+            <a
+              href='https://codepen.io/your-work'
+              target='_blank'
+              rel='noreferrer'
+            >
               <CodePenIcon />
             </a>
           </span>
