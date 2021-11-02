@@ -13,31 +13,34 @@ const options = [
 const CollectionCards = () => {
   return (
     <Fragment>
-      <div className={classes.genderContainer}>
-        {options.map((item, i) => {
-          return (
-            <div className={classes.genderSelect}>
-              <input
-                type='checkbox'
-                value={item.option}
-                name={item.option}
-                id={item.option}
-              />
-              <label htmlFor={item.option}>{item.option}</label>
-            </div>
-          );
-        })}
-      </div>
       <div className={classes.filterNav}>
-        <div className={classes.filters}>
-          <div>
-            <h4> Filter2</h4>
+        <div className={classes.filterContainer}>
+          <div className={classes['filters-div']}>
+            <h4> Filter1</h4>
+            <div className={classes.genderContainer}>
+              {options.map((item, i) => {
+                return (
+                  <div className={classes.genderSelect}>
+                    <input
+                      type='checkbox'
+                      value={item.option}
+                      name={item.option}
+                      id={item.option}
+                    />
+                    <label htmlFor={item.option}>{item.option}</label>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div>
+          <div className={classes['filters-div']}>
+            <h4>Filter2</h4>
+          </div>
+          <div className={classes['filters-div']}>
             <h4>Filter3</h4>
           </div>
-          <div>
-            <h4>Filter4</h4>
+          <div className={classes['filters-div']}>
+            <h4>Filter3</h4>
           </div>
         </div>
 
