@@ -3,8 +3,15 @@ import classes from './CollectionCards.module.scss';
 import sneakers from '../../images/image-product-1.jpg';
 import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
+import { ArrowDownIcon } from '../icons';
 
-const options = [{ option: 'Man' }, { option: 'Women' }];
+const options1 = [{ option: 'Man' }, { option: 'Women' }];
+const options2 = [
+  { option: 'Spring' },
+  { option: 'Summer' },
+  { option: 'Fall' },
+  { option: 'Winter' },
+];
 
 const CollectionCards = () => {
   return (
@@ -12,17 +19,22 @@ const CollectionCards = () => {
       <div className={classes.filterNav}>
         <div className={classes.filterContainer}>
           <div className={classes['filters-div']}>
-            <h4> Filter1</h4>
-            <FilterModal filterArray={options} />
+            <h4> Filter by gender</h4>
+            <ArrowDownIcon />
+            <FilterModal filterArray={options1} />
           </div>
           <div className={classes['filters-div']}>
-            <h4>Filter2</h4>
+            <h4>Filter by collection</h4>
+            <ArrowDownIcon />
+            <FilterModal filterArray={options2} />
           </div>
           <div className={classes['filters-div']}>
-            <h4>Filter3</h4>
+            <h4>Filter by discount</h4>
+            <ArrowDownIcon />
           </div>
           <div className={classes['filters-div']}>
-            <h4>Filter3</h4>
+            <h4>Filter by type</h4>
+            <ArrowDownIcon />
           </div>
         </div>
 
