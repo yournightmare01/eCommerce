@@ -90,3 +90,10 @@
 .colections:hover {
   cursor: pointer;
 }
+
+.cart {
+  padding: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+}

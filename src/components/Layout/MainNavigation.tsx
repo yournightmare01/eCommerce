@@ -43,7 +43,14 @@ const MainNavigation = () => {
         </ul>
       </div>
       <div>
-        <CartIcon />
+        <div
+          className={classes.cart}
+          onClick={() => {
+            console.log('heelo');
+          }}
+        >
+          <CartIcon />
+        </div>
         <img src={avatarImg} alt='user' />
       </div>
     </nav>
