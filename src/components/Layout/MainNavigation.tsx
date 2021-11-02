@@ -17,7 +17,7 @@ const MainNavigation = () => {
         <ul>
           <li onClick={modalToggleHandler}>
             <Link to='/'>Home</Link>
-            {shown && (
+            {/* {shown && (
               <div className={classes.modal}>
                 <span className={classes.modalText}>
                   <Link to='men'>Man</Link>
@@ -26,7 +26,7 @@ const MainNavigation = () => {
                   <Link to='women'>Women</Link>
                 </span>
               </div>
-            )}
+            )} */}
           </li>
           <li>
             <NavLink to='men'>Men</NavLink>

@@ -23,6 +23,18 @@ body {
   font-weight: 400;
 }
 
+*::selection {
+  color: var(--color-primary);
+  background: #ffefe2;
+}
+
+textarea,
+input,
+button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
+}
+
 html {
   font-size: 62.5%;
 }
