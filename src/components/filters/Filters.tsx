@@ -1,16 +1,10 @@
-import classes from './CollectionCards.module.scss';
+import classes from '../collections/CollectionCards.module.scss';
 
-export const options = [
-  {
-    option: 'Man',
-  },
-  { option: 'Women' },
-];
-
-const FilterModal = () => {
+const FilterModal = (props: any) => {
+  console.log(props.filterArray);
   return (
     <div className={classes.genderContainer}>
-      {options.map((item, i) => {
+      {props.filterArray.map((item: any) => {
         return (
           <div className={classes.genderSelect}>
             <input
@@ -29,8 +23,7 @@ const FilterModal = () => {
 
 export default FilterModal;
 
-{
-  /* <div className={classes.genderContainer}>
+/* <div className={classes.genderContainer}>
               {options.map((item, i) => {
                 return (
                   <div className={classes.genderSelect}>
@@ -46,4 +39,3 @@ export default FilterModal;
               })}
             </div>
 } */
-}

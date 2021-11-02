@@ -2,13 +2,9 @@ import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
 import sneakers from '../../images/image-product-1.jpg';
 import { Fragment } from 'react';
+import FilterModal from '../filters/Filters';
 
-const options = [
-  {
-    option: 'Man',
-  },
-  { option: 'Women' },
-];
+const options = [{ option: 'Man' }, { option: 'Women' }];
 
 const CollectionCards = () => {
   return (
@@ -17,21 +13,7 @@ const CollectionCards = () => {
         <div className={classes.filterContainer}>
           <div className={classes['filters-div']}>
             <h4> Filter1</h4>
-            <div className={classes.genderContainer}>
-              {options.map((item, i) => {
-                return (
-                  <div className={classes.genderSelect}>
-                    <input
-                      type='checkbox'
-                      value={item.option}
-                      name={item.option}
-                      id={item.option}
-                    />
-                    <label htmlFor={item.option}>{item.option}</label>
-                  </div>
-                );
-              })}
-            </div>
+            <FilterModal filterArray={options} />
           </div>
           <div className={classes['filters-div']}>
             <h4>Filter2</h4>
