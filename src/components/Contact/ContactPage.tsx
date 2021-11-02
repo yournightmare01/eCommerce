@@ -109,27 +109,11 @@ const Contact = (props: any) => {
       );
   };
 
-  const nameInputClasses = nameInputIsInvalid
-    ? 'form-control invalid'
-    : 'form-control';
-
-  const mailInputClasses = mailInputIsInvalid
-    ? 'form-control invalid'
-    : 'form-control';
-
-  const subjectInputClasses = subjectInputIsInvalid
-    ? 'form-control invalid'
-    : 'form-control';
-
-  const messageInputClasses = messageInputIsInvalid
-    ? 'form-control invalid'
-    : 'form-control';
-
   return (
     <Fragment>
       <div className={classes.contact}>
         <form ref={form} onSubmit={formSubmissionHandler}>
-          <div className={nameInputClasses}>
+          <div>
             <input
               type='text'
               name='name'
@@ -140,7 +124,7 @@ const Contact = (props: any) => {
             />
             {nameInputIsInvalid && <p>Name must not be empty.</p>}
           </div>
-          <div className={mailInputClasses}>
+          <div>
             <input
               type='email'
               name='email'
@@ -151,7 +135,7 @@ const Contact = (props: any) => {
             />
             {mailInputIsInvalid && <p>Please enter a valid format! (@, .)</p>}
           </div>
-          <div className={subjectInputClasses}>
+          <div>
             <input
               type='text'
               name='subject'
@@ -162,7 +146,7 @@ const Contact = (props: any) => {
             />
             {subjectInputIsInvalid && <p>Subject must not be empty.</p>}
           </div>
-          <div className={messageInputClasses}>
+          <div>
             <textarea
               name='message'
               placeholder='message'

@@ -6,6 +6,7 @@
   border-bottom: 0.2rem solid gray;
   height: 10rem;
   font-size: 1.6rem;
+  user-select: none;
   div {
     display: flex;
     align-items: center;
@@ -35,7 +36,6 @@
   }
   img {
     height: 5rem;
-    margin-left: 5rem;
     box-sizing: border-box;
     border-radius: 50%;
 
@@ -46,53 +46,51 @@
   }
 }
 
-.modal {
-  box-sizing: border-box;
-  padding: 7px 0;
-  &::before {
-    position: absolute;
-    transform: rotate(45deg);
-    background-color: #f4f4f4;
-    margin-top: -12.3px;
-    margin-left: 25px;
-
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-left: 0.5px solid black;
-    border-top: 0.5px solid black;
-  }
-  border: 0.5px solid black;
-  margin-left: 2px;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-color: #f4f4f4;
-  position: absolute;
-  margin-top: 8px;
-  width: 74px;
-  height: fit-content;
-  border-radius: 5px;
-}
-
-.modalText {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: 0.2rem;
-}
-
-.modalText:hover {
-  background-color: var(--color-primary-light);
-  cursor: pointer;
-}
-
-.colections:hover {
-  cursor: pointer;
-}
-
 .cart {
-  padding: 1rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-right: 5rem;
+  z-index: 10000;
+  span {
+    svg {
+      transition: 0.2s;
+      fill: #69707d;
+      &:hover {
+        fill: black;
+      }
+    }
+  }
+  &-open {
+    cursor: initial;
+    user-select: text;
+    box-shadow: 0.2rem 0.2rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    position: absolute;
+    background-color: white;
+    border-radius: 1rem;
+    width: 35rem;
+    height: 25rem;
+    margin-top: 32rem;
+    display: flex;
+    flex-direction: column;
+    margin-right: 12.8rem;
+
+    &--name {
+      font-size: 1.5rem;
+      padding: 2rem;
+
+      width: 100%;
+      align-self: flex-start;
+      border-bottom: 1px solid gray;
+    }
+
+    &--items {
+      height: 100%;
+      padding: 2rem;
+      color: var(--dark-grayish-blue);
+    }
+  }
   &:hover {
     cursor: pointer;
   }
