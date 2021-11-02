@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { CartIcon, LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import avatarImg from '../../images/image-avatar.png';
@@ -15,24 +15,8 @@ const MainNavigation = () => {
       <div>
         <LogoIcon />
         <ul>
-          <li onClick={modalToggleHandler}>
-            <Link to='/'>Home</Link>
-            {/* {shown && (
-              <div className={classes.modal}>
-                <span className={classes.modalText}>
-                  <Link to='men'>Man</Link>
-                </span>
-                <span className={classes.modalText}>
-                  <Link to='women'>Women</Link>
-                </span>
-              </div>
-            )} */}
-          </li>
           <li>
-            <NavLink to='men'>Men</NavLink>
-          </li>
-          <li>
-            <NavLink to='women'>Women</NavLink>
+            <NavLink to='collections'>Collection</NavLink>
           </li>
           <li>
             <NavLink to='about'>About</NavLink>
@@ -43,13 +27,24 @@ const MainNavigation = () => {
         </ul>
       </div>
       <div>
-        <div
-          className={classes.cart}
-          onClick={() => {
-            console.log('heelo');
-          }}
-        >
-          <CartIcon />
+        <div className={classes.cart}>
+          {shown && (
+            <div className={classes['cart-open']}>
+              <div className={classes['cart-open--name']}>
+                <h3>Cart</h3>
+              </div>
+              <div className={classes['cart-open--items']}>
+                <h4>Your cart is empty.</h4>
+              </div>
+            </div>
+          )}
+          <span
+            onClick={() => {
+              modalToggleHandler();
+            }}
+          >
+            <CartIcon />
+          </span>
         </div>
         <img src={avatarImg} alt='user' />
       </div>
