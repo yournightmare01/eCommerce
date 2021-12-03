@@ -1,9 +1,8 @@
 .nav {
-  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.2rem solid gray;
+  border-bottom: 0.2rem solid var(--dark-grayish-blue);
   height: 10rem;
   font-size: 1.6rem;
   user-select: none;
@@ -55,9 +54,9 @@
   span {
     svg {
       transition: 0.2s;
-      fill: #69707d;
+      fill: var(--dark-grayish-blue);
       &:hover {
-        fill: black;
+        fill: var(--color-black);
       }
     }
   }
@@ -67,7 +66,7 @@
     box-shadow: 0.2rem 0.2rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
     position: absolute;
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 1rem;
     width: 35rem;
     height: 25rem;
@@ -82,7 +81,7 @@
 
       width: 100%;
       align-self: flex-start;
-      border-bottom: 1px solid gray;
+      border-bottom: 0.1rem solid gray;
     }
 
     &--items {

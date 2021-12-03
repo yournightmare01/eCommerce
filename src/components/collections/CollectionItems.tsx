@@ -7,6 +7,9 @@ export const CollectionData = [
     price: '$125.00',
     discount: '50%',
     oldPrice: '$250.00',
+    gender: 'women',
+    collection: 'fall',
+    type: 'sneakers',
   },
   {
     company: 'Seaker Company',

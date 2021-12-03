@@ -6,25 +6,22 @@ import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
 
-const options1 = [{ option: 'Man' }, { option: 'Women' }];
-const options2 = [
+const gender = [{ option: 'Man' }, { option: 'Women' }];
+const collection = [
   { option: 'Spring' },
   { option: 'Summer' },
   { option: 'Fall' },
   { option: 'Winter' },
 ];
-const options3 = [{ option: 'Ascending' }, { option: 'Descending' }];
-const options4 = [
-  { option: 'Sneakers' },
-  { option: 'Shoes' },
-  { option: 'Boots' },
-];
+const discountSort = [{ option: 'Ascending' }, { option: 'Descending' }];
+const type = [{ option: 'Sneakers' }, { option: 'Shoes' }, { option: 'Boots' }];
 
 const CollectionCards = () => {
   const [isGenderClicked, setIsGenderClicked] = useState(false);
   const [isCollectionClicked, setIsCollectionClicked] = useState(false);
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
   const [isTypeClicked, setIsTypeClicked] = useState(false);
+  const [isSortClicked, setIsSortClicked] = useState(false);
 
   return (
     <Fragment>
@@ -40,7 +37,7 @@ const CollectionCards = () => {
             </div>
             {isGenderClicked && (
               <div className={`${classes.categoryContainer} `}>
-                <FilterModal filterArray={options1} />
+                <FilterModal filterArray={gender} />
               </div>
             )}
           </div>
@@ -55,7 +52,7 @@ const CollectionCards = () => {
             </div>
             {isCollectionClicked && (
               <div className={`${classes.categoryContainer}`}>
-                <FilterModal filterArray={options2} />
+                <FilterModal filterArray={collection} />
               </div>
             )}
           </div>
@@ -69,7 +66,7 @@ const CollectionCards = () => {
             </div>
             {isDiscountClicked && (
               <div className={`${classes.categoryContainer}`}>
-                <FilterModal filterArray={options3} />
+                <FilterModal filterArray={discountSort} />
               </div>
             )}
           </div>
@@ -83,13 +80,20 @@ const CollectionCards = () => {
             </div>
             {isTypeClicked && (
               <div className={`${classes.categoryContainer}`}>
-                <FilterModal filterArray={options4} />
+                <FilterModal filterArray={type} />
               </div>
             )}
           </div>
         </div>
         <div className={classes.sortContainer}>
-          <span>Price Ascending</span>
+          <span
+            onClick={() => {
+              setIsSortClicked(!isSortClicked);
+            }}
+          >
+            Price
+            {isSortClicked ? ' Ascending' : ' Descending'}
+          </span>
         </div>
       </div>
       <div className={classes.layout}>

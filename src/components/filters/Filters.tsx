@@ -4,7 +4,12 @@ const FilterModal = (props: any, id: any) => {
   return props.filterArray.map((item: any) => {
     return (
       <div className={classes.genderSelect}>
-        <input type='checkbox' value={item.option} name={item.option} />
+        <input
+          type='checkbox'
+          id={item.option}
+          value={item.option}
+          name={item.option}
+        />
         <label htmlFor={item.option}>{item.option}</label>
       </div>
     );

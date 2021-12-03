@@ -1,6 +1,7 @@
 :root {
   --color-primary: #ff7a14;
-  --color-primary-light: #ffcd9b;
+  --color-secondary: #ffcd9b;
+  --color-tertiary: #ffefe2;
 
   //////////////////////////////////////
   --very-dark-blue: #1d2025;
@@ -18,14 +19,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 1440px;
+  max-width: 144rem;
+  padding: 0 2rem;
   margin: 0 auto;
   font-weight: 400;
 }
 
 *::selection {
   color: var(--color-primary);
-  background: #ffefe2;
+  background: (var(--color-tertiary));
 }
 
 textarea,
