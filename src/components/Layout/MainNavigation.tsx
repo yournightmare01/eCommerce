@@ -16,13 +16,13 @@ const MainNavigation = () => {
         <LogoIcon />
         <ul>
           <li>
-            <NavLink to='collections'>Collection</NavLink>
+            <NavLink to='/collections'>Collection</NavLink>
           </li>
           <li>
-            <NavLink to='about'>About</NavLink>
+            <NavLink to='/about'>About</NavLink>
           </li>
           <li>
-            <NavLink to='contact'>Contact</NavLink>
+            <NavLink to='/contact'>Contact</NavLink>
           </li>
         </ul>
       </div>
