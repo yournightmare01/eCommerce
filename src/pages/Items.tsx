@@ -1,43 +1,54 @@
+import { useParams } from 'react-router';
 import { MinusIcon, PlusIcon, CartIcon } from '../components/icons';
 import Slider from '../components/slider/slider';
-
+import { collectionItems } from '../components/collections/CollectionItems';
 import classes from './styles.module.scss';
+import { Fragment } from 'react';
 
-const Items = () => {
+interface CollectionItemsProps {
+  items: collectionItems[];
+}
+
+const Items: React.FC<CollectionItemsProps> = ({ items }) => {
+  const params = useParams() as { itemId: string };
+  const link = params.itemId;
+  const page = items.find((item) => item.link === link);
+  console.log(page);
+
   return (
-    <div className={classes.container}>
-      <div className={classes.left}>
-        <Slider />
-      </div>
-      <div className={classes.right}>
-        <div className={classes['product-detail']}>
-          <span>sneaker company</span>
-          <h2>Fall Limited Edition Sneakers</h2>
-          <p className={classes.description}>
-            These low-profile sneakers are your perfect casual wear companion.
-            Featuring a durable rubber outer sole, they'll withstand everything
-            the weather can offer.
-          </p>
-
-          <div className={classes.cost}>
-            <p className={classes.price}>$125.00</p>
-            <p className={classes.discount}>50%</p>
+    <Fragment>
+      {page && (
+        <div className={classes.container}>
+          <div className={classes.left}>
+            <Slider />
           </div>
-          <p className={classes.oldPrice}>$250.00</p>
-          <div className={classes.cart}>
-            <div className={classes.amount}>
-              <MinusIcon />
-              <input type='text' value='0' />
-              <PlusIcon />
-            </div>
+          <div className={classes.right}>
+            <div className={classes['product-detail']}>
+              <span>{page.company}</span>
+              <h2>{page.title}</h2>
+              <p className={classes.description}>{page.description}</p>
 
-            <button className={classes['add-to-cart']}>
-              <CartIcon /> Add to cart
-            </button>
+              <div className={classes.cost}>
+                <p className={classes.price}>{page.price}</p>
+                <p className={classes.discount}>{page.discount}</p>
+              </div>
+              <p className={classes.oldPrice}>{page.oldPrice}</p>
+              <div className={classes.cart}>
+                <div className={classes.amount}>
+                  <MinusIcon />
+                  <input type='text' />
+                  <PlusIcon />
+                </div>
+
+                <button className={classes['add-to-cart']}>
+                  <CartIcon /> Add to cart
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </Fragment>
   );
 };
 

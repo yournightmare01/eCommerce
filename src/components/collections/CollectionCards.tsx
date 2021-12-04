@@ -99,7 +99,7 @@ const CollectionCards = () => {
       <div className={classes.layout}>
         {CollectionData.map((item, i) => {
           return (
-            <div className={classes.cards}>
+            <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
               <img src={sneakers} alt='' />
               <div className={classes.cost}>

@@ -92,7 +92,7 @@
 }
 
 .amount {
-  padding: 1.75rem 2rem;
+  padding: 1.25rem 2rem;
   background-color: #f7f8fd;
   width: 12rem;
   margin-right: 2rem;
@@ -113,6 +113,7 @@
   svg {
     fill: var(--color-primary);
     transition: all 0.2s;
+    padding: 1rem;
 
     &:hover {
       cursor: pointer;
@@ -125,7 +126,7 @@
   border: none;
   background-color: var(--color-primary);
   color: #fff;
-  padding: 1.75rem 8rem;
+  padding: 1.25rem 8rem;
   transition: all 0.3s;
   svg {
     fill: #fff;
