@@ -76,6 +76,33 @@ export const CollectionData: collectionItems[] = [
 
   {
     link: '5',
+    company: 'Nike',
+    title: 'NIKE ATSUMA',
+    description:
+      'Nike Atsuma muške patike donose vam vrhunsku udobnost za svakodnevno nošenje. Ovaj model spaja autentičan dizajn iz 90-ih sa super komfornom tehnologijom karakterističnom za trkačke patike.',
+    price: '$80.34',
+    gender: 'man',
+    collection: 'spring/summer',
+    type: 'sneakers',
+    image:
+      'https://www.sportvision.rs/files/thumbs/files/images/slike_proizvoda/media/CD5/CD5461-004/images/thumbs_600/CD5461-004_600_600px.jpg',
+  },
+  {
+    link: '6',
+    company: 'Nike',
+    title: 'Nike Court Borough Low 2',
+    description:
+      'Nike Court Borough Low 2 su dečije patike plitkog profila namenjene deci od 4 do 10 godina. Retro dizajn inspirisan košarkom donosi udobnost i elegantan sportski stil. Gornji deo je izrađen od prirodne kože, sintetike i tekstila. Patike imaju pertle, ali i traku na lepljenje koja osigurava zglob i omogućava lakše obuvanje i izuvanje.',
+    price: '$37.29',
+    gender: 'man',
+    collection: 'spring/summer',
+    type: 'sneakers',
+    image:
+      'https://www.sportvision.rs/files/thumbs/files/images/slike_proizvoda/media/BQ5/BQ5451-115/images/thumbs_600/BQ5451-115_600_600px.jpg',
+  },
+
+  {
+    link: '7',
     company: 'Addidas',
     title: 'Addidas Kaptir 2.0',
     description:
@@ -89,8 +116,9 @@ export const CollectionData: collectionItems[] = [
       'https://www.sportvision.rs/files/thumbs/files/images/slike_proizvoda/media/H00/H00279/images/thumbs_600/H00279_600_600px.jpg',
     discount: '30%',
   },
+
   {
-    link: '6',
+    link: '8',
     company: 'Addidas',
     title: 'Addidas 8K 2020',
     description:
@@ -103,18 +131,5 @@ export const CollectionData: collectionItems[] = [
     image:
       'https://www.sportvision.rs/files/thumbs/files/images/slike_proizvoda/media/EH1/EH1429/images/thumbs_600/EH1429_600_600px.jpg',
     discount: '20%',
-  },
-  {
-    link: '7',
-    company: 'Addidas',
-    title: 'Addidas RACER TR21',
-    description:
-      'Ako ste u potrazi za vrhunskim patikama za trčanje, ovaj model će zadovoljiti vaše potrebe. Minimalistički dizajn postiže se elegantnim linijama. Unapređene Cloudfoam tehnologijom, ove patike poseduju mekane jastučiće, koji omogućavaju pokrete bez opterećenja i izuzetnu udobnost.',
-    price: '$150.40',
-    gender: 'man',
-    collection: 'spring/summer',
-    type: 'sneakers',
-    image:
-      'https://www.sportvision.rs/files/thumbs/files/images/slike_proizvoda/media/GZ8/GZ8185/images/thumbs_600/GZ8185_600_600px.jpg',
   },
 ];
