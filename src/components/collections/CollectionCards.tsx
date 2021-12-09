@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
 import sneakers from '../../images/image-product-1.jpg';
@@ -22,6 +22,25 @@ const CollectionCards = () => {
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
   const [isTypeClicked, setIsTypeClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        'https://openapi.etsy.com/v2/listings/active?api_key=l3l05s3fsldandekrnr6lmxj',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      let data = response.json();
+
+      console.log(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Fragment>
@@ -96,6 +115,7 @@ const CollectionCards = () => {
           </span>
         </div>
       </div>
+
       <div className={classes.layout}>
         {CollectionData.map((item, i) => {
           return (
