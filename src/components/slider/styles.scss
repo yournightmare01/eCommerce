@@ -27,7 +27,7 @@
 }
 
 .swiper-container {
-  width: 500px;
+  width: 50rem;
 }
 
 .swiper-pagination {
@@ -63,5 +63,24 @@
       filter: opacity(0.7);
       cursor: pointer;
     }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .swiper-container {
+    width: 100%;
+  }
+
+  .slider {
+    width: 100vw;
+    img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 0;
+    }
+  }
+
+  #thumbs {
+    display: none;
   }
 }

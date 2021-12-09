@@ -30,7 +30,9 @@ const Items: React.FC<CollectionItemsProps> = ({ items }) => {
 
               <div className={classes.cost}>
                 <p className={classes.price}>{page.price}</p>
-                <p className={classes.discount}>{page.discount}</p>
+                {page.discount && (
+                  <p className={classes.discount}>{page.discount}</p>
+                )}
               </div>
               <p className={classes.oldPrice}>{page.oldPrice}</p>
               <div className={classes.cart}>

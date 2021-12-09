@@ -104,7 +104,9 @@ const CollectionCards = () => {
               <img src={item.image} alt='' />
               <div className={classes.cost}>
                 <p className={classes.price}>{item.price}</p>
-                <p className={classes.discount}>{item.discount}</p>
+                {item.discount && (
+                  <p className={classes.discount}>{item.discount}</p>
+                )}
               </div>
               <p className={classes.oldPrice}>{item.oldPrice}</p>
             </div>
