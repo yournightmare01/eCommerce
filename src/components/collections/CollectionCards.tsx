@@ -26,7 +26,7 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v2/listings/active?api_key=l3l05s3fsldandekrnr6lmxj',
+        'https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?limit=30&includes=Images&api_key=l3l05s3fsldandekrnr6lmxj',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const CollectionCards = () => {
         }
       );
 
-      let data = response.json();
+      let data = await response.json();
 
       console.log(data);
     };
