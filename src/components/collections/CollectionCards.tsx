@@ -26,7 +26,7 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?limit=30&includes=Images&api_key=l3l05s3fsldandekrnr6lmxj',
+        'https://openapi.etsy.com/v2/listings/active?limit=30&includes=Images&includes=MainImage&api_key=l3l05s3fsldandekrnr6lmxj',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ const CollectionCards = () => {
           return (
             <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
-              <img src={item} alt='' />
+              <img src={item.MainImage.url_170x135} alt='' />
               <div className={classes.cost}>
                 <p className={classes.price}>{item.price}</p>
                 {item.discount && (
