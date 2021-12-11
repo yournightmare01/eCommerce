@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
-import sneakers from '../../images/image-product-1.jpg';
 import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
@@ -22,21 +21,28 @@ const CollectionCards = () => {
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
   const [isTypeClicked, setIsTypeClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
+  const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v2/listings/active?api_key=l3l05s3fsldandekrnr6lmxj'
+        'https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?limit=30&includes=Images&api_key=l3l05s3fsldandekrnr6lmxj',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
 
       let data = await response.json();
 
-      console.log(data);
+      setApiData(data.results);
     };
 
     fetchData();
   }, []);
 
+  console.log(apiData);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -112,11 +118,13 @@ const CollectionCards = () => {
       </div>
 
       <div className={classes.layout}>
-        {CollectionData.map((item, i) => {
+        {apiData.map((item: any, i) => {
+          //ts-ignore
+          console.log(item.title);
           return (
             <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
-              <img src={item.image} alt='' />
+              <img src={item} alt='' />
               <div className={classes.cost}>
                 <p className={classes.price}>{item.price}</p>
                 {item.discount && (
