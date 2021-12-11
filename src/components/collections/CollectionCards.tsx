@@ -26,15 +26,10 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v2/listings/active?api_key=l3l05s3fsldandekrnr6lmxj',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        'https://openapi.etsy.com/v2/listings/active?api_key=l3l05s3fsldandekrnr6lmxj'
       );
 
-      let data = response.json();
+      let data = await response.json();
 
       console.log(data);
     };
