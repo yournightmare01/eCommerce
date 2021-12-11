@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
 import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
