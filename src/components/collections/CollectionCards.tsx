@@ -42,7 +42,7 @@ const CollectionCards = () => {
     fetchData();
   }, []);
 
-  console.log(apiData);
+  // console.log(apiData);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -120,7 +120,7 @@ const CollectionCards = () => {
       <div className={classes.layout}>
         {apiData.map((item: any, i) => {
           //ts-ignore
-          console.log(item.title);
+          // console.log(item.title);
           return (
             <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
