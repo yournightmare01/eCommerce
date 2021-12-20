@@ -1,10 +1,11 @@
 .layout {
   display: grid;
   margin-top: 2rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 26.5rem);
   grid-gap: 3rem;
 
   .cards {
+    overflow: hidden;
     box-sizing: border-box;
     border-top: 0.5rem solid var(--color-primary);
     border-radius: 0.5rem;
@@ -15,6 +16,8 @@
     background-color: #f6f6f6;
     align-items: center;
     box-shadow: 0.2rem 0.2rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    position: relative;
     & > *:not(:last-child) {
       margin-bottom: 1.5rem;
     }
@@ -27,6 +30,9 @@
       .price {
         font-weight: 700;
         font-size: 2rem;
+        position: absolute;
+        right: 2.5rem;
+        bottom: 2.5rem;
       }
 
       .discount {
@@ -50,12 +56,14 @@
     img {
       border-radius: 0.5rem;
       width: 100%;
+      padding-bottom: 2.5rem;
       &:hover {
         cursor: pointer;
       }
     }
 
     p {
+      align-self: flex-start;
       font-size: 1.6rem;
     }
   }

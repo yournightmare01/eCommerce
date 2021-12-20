@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
 import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
@@ -26,12 +25,7 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v2/listings/active?limit=30&includes=Images&includes=MainImage&api_key=l3l05s3fsldandekrnr6lmxj',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        'https://openapi.etsy.com/v2/shops/BlvdCustom/listings/active?includes=Images&includes=MainImage&limit=30&api_key=l3l05s3fsldandekrnr6lmxj'
       );
 
       let data = await response.json();
@@ -119,14 +113,12 @@ const CollectionCards = () => {
 
       <div className={classes.layout}>
         {apiData.map((item: any, i) => {
-          //ts-ignore
-          console.log(item.title);
           return (
             <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
-              <img src={item.MainImage.url_170x135} alt='' />
+              <img src={item.MainImage.url_570xN} alt='' />
               <div className={classes.cost}>
-                <p className={classes.price}>{item.price}</p>
+                <p className={classes.price}>{item.price}€</p>
                 {item.discount && (
                   <p className={classes.discount}>{item.discount}</p>
                 )}
