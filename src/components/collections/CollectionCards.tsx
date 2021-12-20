@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { CollectionData } from './CollectionItems';
 import classes from './CollectionCards.module.scss';
 import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
@@ -26,10 +25,21 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v2/listings/active?limit=30&includes=Images&includes=MainImage&api_key=l3l05s3fsldandekrnr6lmxj',
+        'https://openapi.etsy.com/v3/application/shops/7350535/shop-sections/listings?shop_section_ids=34389363&limit=20&includes=Images&includes=MainImage',
+
+        //https://developers.etsy.com/documentation/reference#operation/getListingImages
+        //DOKUMENTACIJA
+
+        //7350535
+
+        //
+        //https://openapi.etsy.com/v3/application/shops/SpaceHippieShop/shop-sections/listings?shop_section_ids=[34389363]
+
         {
           headers: {
             'Content-Type': 'application/json',
+            'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
+            // client_id: 'l3l05s3fsldandekrnr6lmxj',
           },
         }
       );
@@ -37,6 +47,7 @@ const CollectionCards = () => {
       let data = await response.json();
 
       setApiData(data.results);
+      console.log(data.results);
     };
 
     fetchData();
@@ -118,7 +129,7 @@ const CollectionCards = () => {
       </div>
 
       <div className={classes.layout}>
-        {apiData.map((item: any, i) => {
+        {/* {apiData.map((item: any, i) => {
           //ts-ignore
           // console.log(item.title);
           return (
@@ -134,7 +145,7 @@ const CollectionCards = () => {
               <p className={classes.oldPrice}>{item.oldPrice}</p>
             </div>
           );
-        })}
+        })} */}
       </div>
     </Fragment>
   );
