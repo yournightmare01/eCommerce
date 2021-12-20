@@ -25,18 +25,37 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v2/shops/BlvdCustom/listings/active?includes=Images&includes=MainImage&limit=30&api_key=l3l05s3fsldandekrnr6lmxj'
+        // 'https://openapi.etsy.com/v3/application/shops?shop_name=BisYOU',
+        // get shop id...
+
+        // 'https://openapi.etsy.com/v3/application/shops/25120132/shop-sections/listings?shop_section_ids=34543175',
+        // get listing ids and push into array and fetch with it
+
+        'https://openapi.etsy.com/v3/application/listings/batch?listing_ids=1016679764,1050778971&includes=Images',
+        // use array to fillout listing ids to get multiple products with images
+
+        //https://developers.etsy.com/documentation/reference#operation/getListingImages
+        //DOKUMENTACIJA
+
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
+            // client_id: 'l3l05s3fsldandekrnr6lmxj',
+          },
+        }
       );
 
       let data = await response.json();
 
       setApiData(data.results);
+      console.log(data.results);
     };
 
     fetchData();
   }, []);
 
-  console.log(apiData);
+  // console.log(apiData);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -112,11 +131,11 @@ const CollectionCards = () => {
       </div>
 
       <div className={classes.layout}>
-        {apiData.map((item: any, i) => {
+        {/* {apiData.map((item: any, i) => {
           return (
             <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
-              <img src={item.MainImage.url_570xN} alt='' />
+              <img src={item.url_570xN} alt='' />
               <div className={classes.cost}>
                 <p className={classes.price}>{item.price}€</p>
                 {item.discount && (
@@ -126,7 +145,7 @@ const CollectionCards = () => {
               <p className={classes.oldPrice}>{item.oldPrice}</p>
             </div>
           );
-        })}
+        })} */}
       </div>
     </Fragment>
   );
