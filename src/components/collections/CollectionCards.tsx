@@ -20,7 +20,33 @@ const CollectionCards = () => {
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
   const [isTypeClicked, setIsTypeClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
+  const [apiIds, setApiIds] = useState<number[]>([]);
   const [apiData, setApiData] = useState([]);
+
+  useEffect(() => {
+    // GET PRODUCT IDS
+    const fetchData = async () => {
+      const response = await fetch(
+        'https://openapi.etsy.com/v3/application/shops/25120132/shop-sections/listings?shop_section_ids=34543175',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
+          },
+        }
+      );
+
+      let data = await response.json();
+
+      let arr: number[] = [];
+      data.results.forEach((element: any) => {
+        arr.push(element.listing_id);
+      });
+      setApiIds(arr);
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,11 +54,9 @@ const CollectionCards = () => {
         // 'https://openapi.etsy.com/v3/application/shops?shop_name=BisYOU',
         // get shop id...
 
-        // 'https://openapi.etsy.com/v3/application/shops/25120132/shop-sections/listings?shop_section_ids=34543175',
-        // get listing ids and push into array and fetch with it
-
-        'https://openapi.etsy.com/v3/application/listings/batch?listing_ids=1016679764,1050778971&includes=Images',
-        // use array to fillout listing ids to get multiple products with images
+        `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${[
+          apiIds,
+        ]}&includes=Images`,
 
         //https://developers.etsy.com/documentation/reference#operation/getListingImages
         //DOKUMENTACIJA
@@ -41,7 +65,6 @@ const CollectionCards = () => {
           headers: {
             'Content-Type': 'application/json',
             'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-            // client_id: 'l3l05s3fsldandekrnr6lmxj',
           },
         }
       );
@@ -53,9 +76,8 @@ const CollectionCards = () => {
     };
 
     fetchData();
-  }, []);
+  }, [apiIds]);
 
-  // console.log(apiData);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -131,21 +153,24 @@ const CollectionCards = () => {
       </div>
 
       <div className={classes.layout}>
-        {/* {apiData.map((item: any, i) => {
+        {apiData.map((item: any, i) => {
           return (
             <div key={Math.random()} className={classes.cards}>
               <p>{item.title}</p>
-              <img src={item.url_570xN} alt='' />
+              <img src={item.images[0].url_170x135} alt='404' />
+
               <div className={classes.cost}>
-                <p className={classes.price}>{item.price}€</p>
+                <p className={classes.price}>
+                  {item.price.amount}
+                  {item.price.currency_code}
+                </p>
                 {item.discount && (
                   <p className={classes.discount}>{item.discount}</p>
                 )}
               </div>
-              <p className={classes.oldPrice}>{item.oldPrice}</p>
             </div>
           );
-        })} */}
+        })}
       </div>
     </Fragment>
   );
