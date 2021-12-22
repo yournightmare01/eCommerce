@@ -22,12 +22,13 @@ const CollectionCards = () => {
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [apiIds, setApiIds] = useState<number[]>([]);
   const [apiData, setApiData] = useState([]);
+  let discount = 10;
 
   useEffect(() => {
     // GET PRODUCT IDS
     const fetchData = async () => {
       const response = await fetch(
-        'https://openapi.etsy.com/v3/application/shops/25120132/shop-sections/listings?shop_section_ids=34543175',
+        'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ const CollectionCards = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        // 'https://openapi.etsy.com/v3/application/shops?shop_name=BisYOU',
+        // 'https://openapi.etsy.com/v3/application/shops?shop_name=BlvdCustom',
         // get shop id...
 
         `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${[
@@ -78,6 +79,7 @@ const CollectionCards = () => {
     fetchData();
   }, [apiIds]);
 
+  console.log(apiData);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -156,18 +158,22 @@ const CollectionCards = () => {
         {apiData.map((item: any, i) => {
           return (
             <div key={Math.random()} className={classes.cards}>
-              <p>{item.title}</p>
+              <p>{item.title.substring(0, 25)}...</p>
               <img src={item.images[0].url_170x135} alt='404' />
 
               <div className={classes.cost}>
                 <p className={classes.price}>
-                  {item.price.amount}
+                  {((item.price.amount / item.price.divisor / 10) * 9).toFixed(
+                    2
+                  )}{' '}
                   {item.price.currency_code}
                 </p>
-                {item.discount && (
-                  <p className={classes.discount}>{item.discount}</p>
-                )}
+                <p className={classes.discount}>{discount}%</p>
               </div>
+
+              <p className={classes.oldPrice}>
+                {(item.price.amount / item.price.divisor).toFixed(2)}{' '}
+              </p>
             </div>
           );
         })}
