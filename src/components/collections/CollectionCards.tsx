@@ -3,6 +3,8 @@ import classes from './CollectionCards.module.scss';
 import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
+import { Link } from 'react-router-dom';
+import Collections from '../../pages/Collections';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
 const collection = [
@@ -77,6 +79,8 @@ const CollectionCards = () => {
 
     fetchData();
   }, [apiIds, apiLink]);
+
+  console.log(apiData);
 
   return (
     <Fragment>
@@ -160,24 +164,27 @@ const CollectionCards = () => {
       <div className={classes.layout}>
         {apiData.map((item: any, i) => {
           return (
-            <div key={Math.random()} className={classes.cards}>
-              <p>{item.title.substring(0, 25)}...</p>
-              <img src={item.images[0].url_170x135} alt='404' />
+            <Link to={`collections/${item.listing_id}`}>
+              <div key={Math.random()} className={classes.cards}>
+                <p>{item.title.substring(0, 25)}...</p>
+                <img src={item.images[0].url_170x135} alt='404' />
 
-              <div className={classes.cost}>
-                <p className={classes.price}>
-                  {((item.price.amount / item.price.divisor / 10) * 9).toFixed(
-                    2
-                  )}{' '}
-                  {item.price.currency_code}
+                <div className={classes.cost}>
+                  <p className={classes.price}>
+                    {(
+                      (item.price.amount / item.price.divisor / 10) *
+                      9
+                    ).toFixed(2)}{' '}
+                    {item.price.currency_code}
+                  </p>
+                  <p className={classes.discount}>{discount}%</p>
+                </div>
+
+                <p className={classes.oldPrice}>
+                  {(item.price.amount / item.price.divisor).toFixed(2)}{' '}
                 </p>
-                <p className={classes.discount}>{discount}%</p>
               </div>
-
-              <p className={classes.oldPrice}>
-                {(item.price.amount / item.price.divisor).toFixed(2)}{' '}
-              </p>
-            </div>
+            </Link>
           );
         })}
       </div>
