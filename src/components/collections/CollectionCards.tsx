@@ -22,20 +22,20 @@ const CollectionCards = () => {
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [apiIds, setApiIds] = useState<number[]>([]);
   const [apiData, setApiData] = useState([]);
+  const [apiLink, setApiLink] = useState(
+    'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15'
+  );
   let discount = 10;
 
   useEffect(() => {
     // GET PRODUCT IDS
     const fetchData = async () => {
-      const response = await fetch(
-        'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-          },
-        }
-      );
+      const response = await fetch(apiLink, {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
+        },
+      });
 
       let data = await response.json();
 
@@ -47,7 +47,7 @@ const CollectionCards = () => {
     };
 
     fetchData();
-  }, []);
+  }, [apiLink]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,12 +55,12 @@ const CollectionCards = () => {
         // 'https://openapi.etsy.com/v3/application/shops?shop_name=BlvdCustom',
         // get shop id...
 
+        //https://developers.etsy.com/documentation/reference/#operation/getListingsByListingIds
+        //DOKUMENTACIJA
+
         `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${[
           apiIds,
-        ]}&includes=Images`,
-
-        //https://developers.etsy.com/documentation/reference#operation/getListingImages
-        //DOKUMENTACIJA
+        ]}&includes=Images&`,
 
         {
           headers: {
@@ -73,13 +73,11 @@ const CollectionCards = () => {
       let data = await response.json();
 
       setApiData(data.results);
-      console.log(data.results);
     };
 
     fetchData();
-  }, [apiIds]);
+  }, [apiIds, apiLink]);
 
-  console.log(apiData);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -146,6 +144,11 @@ const CollectionCards = () => {
           <span
             onClick={() => {
               setIsSortClicked(!isSortClicked);
+              setApiLink(
+                isSortClicked
+                  ? apiLink + '&sort_on=price&sort_order=desc'
+                  : apiLink + '&sort_on=price&sort_order=asc'
+              );
             }}
           >
             Price
