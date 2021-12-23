@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
 import { Link } from 'react-router-dom';
-import Collections from '../../pages/Collections';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
 const collection = [
