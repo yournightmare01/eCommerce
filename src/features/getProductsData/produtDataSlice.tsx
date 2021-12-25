@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const getProductIds = createAsyncThunk('productIds', async () => {
+export const getProductData = createAsyncThunk('productData', async () => {
   const response = await fetch(
     'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15',
     {
@@ -28,25 +28,25 @@ export const getProductIds = createAsyncThunk('productIds', async () => {
   return productData.results;
 });
 
-interface UsersState {
-  productIds: any;
+interface DataState {
+  productData: any;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
-const initialState: UsersState = {
-  productIds: [],
+const initialState: DataState = {
+  productData: [],
   loading: 'idle',
 };
 
-const productIdsSlice = createSlice({
-  name: 'productId',
+const productDataSlice = createSlice({
+  name: 'productData',
   initialState,
   reducers: {
     start(state: any) {
       state.status = 'loading';
     },
     success(state: any, action) {
-      state.productIds = action.payload;
+      state.productData = action.payload;
       state.status = 'success';
     },
     fail(state: any) {
@@ -55,17 +55,17 @@ const productIdsSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(getProductIds.pending, (state: any) => {
+    builder.addCase(getProductData.pending, (state: any) => {
       state.status = 'loading';
     });
-    builder.addCase(getProductIds.fulfilled, (state: any, action: any) => {
+    builder.addCase(getProductData.fulfilled, (state: any, action: any) => {
       state.status = 'succeeded';
-      state.productIds = action.payload;
+      state.productData = action.payload;
     });
-    builder.addCase(getProductIds.rejected, (state: any) => {
+    builder.addCase(getProductData.rejected, (state: any) => {
       state.status = 'failed';
     });
   },
 });
 
-export default productIdsSlice.reducer;
+export default productDataSlice.reducer;

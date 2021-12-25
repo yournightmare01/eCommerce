@@ -5,6 +5,7 @@ import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
 import { Link } from 'react-router-dom';
 import { getProductIds } from '../../features/productIds/productIdsSlice';
+import { getProductData } from '../../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
@@ -31,10 +32,14 @@ const CollectionCards = () => {
   let discount = 10;
 
   const dispatch = useAppDispatch();
+  const { productData } = useAppSelector((state) => state.productData);
   const { productIds } = useAppSelector((state) => state.productIds);
 
   useEffect(() => {
     dispatch(getProductIds());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(getProductData());
   }, [dispatch]);
 
   useEffect(() => {
@@ -88,7 +93,9 @@ const CollectionCards = () => {
     fetchData();
   }, [apiIds, apiLink]);
 
-  console.log(productIds['results']);
+  productIds && console.log(productIds[0]);
+  productData && console.log(productData);
+
   return (
     <Fragment>
       <div className={classes.filterNav}>
