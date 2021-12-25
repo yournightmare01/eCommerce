@@ -4,6 +4,8 @@ import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
 import { Link } from 'react-router-dom';
+import { getProductIds } from '../../features/productIds/productIdsSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
 const collection = [
@@ -27,6 +29,13 @@ const CollectionCards = () => {
     'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15'
   );
   let discount = 10;
+
+  const dispatch = useAppDispatch();
+  const { productIds } = useAppSelector((state) => state.productIds);
+
+  useEffect(() => {
+    dispatch(getProductIds());
+  }, [dispatch]);
 
   useEffect(() => {
     // GET PRODUCT IDS
@@ -79,8 +88,7 @@ const CollectionCards = () => {
     fetchData();
   }, [apiIds, apiLink]);
 
-  console.log(apiData);
-
+  console.log(productIds['results']);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -163,7 +171,7 @@ const CollectionCards = () => {
       <div className={classes.layout}>
         {apiData.map((item: any, i) => {
           return (
-            <Link to={`collections/${item.listing_id}`}>
+            <Link to={`collections/${item.listing_id}`} key={i}>
               <div key={Math.random()} className={classes.cards}>
                 <p>{item.title.substring(0, 25)}...</p>
                 <img src={item.images[0].url_170x135} alt='404' />
