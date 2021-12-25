@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
 import { Link } from 'react-router-dom';
-import { getProductIds } from '../../features/productIds/productIdsSlice';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
@@ -17,6 +16,8 @@ const collection = [
 ];
 const discountSort = [{ option: 'Ascending' }, { option: 'Descending' }];
 const type = [{ option: 'Sneakers' }, { option: 'Shoes' }, { option: 'Boots' }];
+export let apiLink =
+  'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15';
 
 const CollectionCards = () => {
   const [isGenderClicked, setIsGenderClicked] = useState(false);
@@ -24,78 +25,19 @@ const CollectionCards = () => {
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
   const [isTypeClicked, setIsTypeClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
-  const [apiIds, setApiIds] = useState<number[]>([]);
-  const [apiData, setApiData] = useState([]);
-  const [apiLink, setApiLink] = useState(
-    'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15'
-  );
+  // const [apiLink, setApiLink] = useState(
+  //   'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15'
+  // );
   let discount = 10;
 
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
-  const { productIds } = useAppSelector((state) => state.productIds);
 
-  useEffect(() => {
-    dispatch(getProductIds());
-  }, [dispatch]);
   useEffect(() => {
     dispatch(getProductData());
   }, [dispatch]);
 
-  useEffect(() => {
-    // GET PRODUCT IDS
-    const fetchData = async () => {
-      const response = await fetch(apiLink, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-        },
-      });
-
-      let data = await response.json();
-
-      let arr: number[] = [];
-      data.results.forEach((element: any) => {
-        arr.push(element.listing_id);
-      });
-      setApiIds(arr);
-    };
-
-    fetchData();
-  }, [apiLink]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        // 'https://openapi.etsy.com/v3/application/shops?shop_name=BlvdCustom',
-        // get shop id...
-
-        //https://developers.etsy.com/documentation/reference/#operation/getListingsByListingIds
-        //DOKUMENTACIJA
-
-        `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${[
-          apiIds,
-        ]}&includes=Images&`,
-
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-          },
-        }
-      );
-
-      let data = await response.json();
-
-      setApiData(data.results);
-    };
-
-    fetchData();
-  }, [apiIds, apiLink]);
-
-  productIds && console.log(productIds[0]);
-  productData && console.log(productData);
-
+  console.log(apiLink);
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -162,11 +104,10 @@ const CollectionCards = () => {
           <span
             onClick={() => {
               setIsSortClicked(!isSortClicked);
-              setApiLink(
-                isSortClicked
-                  ? apiLink + '&sort_on=price&sort_order=desc'
-                  : apiLink + '&sort_on=price&sort_order=asc'
-              );
+              apiLink = isSortClicked
+                ? 'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15&sort_on=price&sort_order=desc'
+                : 'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15&sort_on=price&sort_order=asc';
+              console.log(apiLink);
             }}
           >
             Price
@@ -176,7 +117,7 @@ const CollectionCards = () => {
       </div>
 
       <div className={classes.layout}>
-        {apiData.map((item: any, i) => {
+        {productData.map((item: any, i: number) => {
           return (
             <Link to={`collections/${item.listing_id}`} key={i}>
               <div key={Math.random()} className={classes.cards}>

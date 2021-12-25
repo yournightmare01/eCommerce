@@ -12,18 +12,27 @@ import 'swiper/components/effect-coverflow/effect-coverflow.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 
-import Slide1 from '../../images/image-product-1.jpg';
-import Slide2 from '../../images/image-product-2.jpg';
-import Slide3 from '../../images/image-product-3.jpg';
-import Slide4 from '../../images/image-product-4.jpg';
-
+import { useParams } from 'react-router';
+import { useState, useEffect } from 'react';
+import { getProductData } from '../../features/getProductsData/produtDataSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import './styles.scss';
-import { useState } from 'react';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination, Controller, Thumbs]);
 
 const Slider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const dispatch = useAppDispatch();
+  const { productData } = useAppSelector((state) => state.productData);
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(getProductData());
+  }, [dispatch]);
+
+  const product = productData.filter(
+    (item) => item.listing_id === +params.itemId
+  );
 
   return (
     <div className='slider'>
@@ -44,18 +53,13 @@ const Slider = () => {
           clickable: true,
         }}
       >
-        <SwiperSlide>
-          <img src={Slide1} alt='' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Slide2} alt='' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Slide3} alt='' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Slide4} alt='' />
-        </SwiperSlide>
+        {product[0].images.map((arg) => {
+          return (
+            <SwiperSlide>
+              <img src={arg.url_570xN} alt='' />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
 
       <Swiper
@@ -64,18 +68,13 @@ const Slider = () => {
         slidesPerView={4}
         onSwiper={setThumbsSwiper}
       >
-        <SwiperSlide>
-          <img src={Slide1} alt='' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Slide2} alt='' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Slide3} alt='' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={Slide4} alt='' />
-        </SwiperSlide>
+        {product[0].images.map((arg) => {
+          return (
+            <SwiperSlide>
+              <img src={arg.url_170x135} alt='' />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );

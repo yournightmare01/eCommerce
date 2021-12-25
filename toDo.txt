@@ -1,0 +1,17 @@
+1) sorting da radi asc/desc (verovatno mora sa redux state da se menja link)
+
+2) ostatak filtera napraviti da rade
+
+3) "add to cart" dugme dodaje u korpu stvari
+
+4) + i - pored "add to cart" da rade
+
+5) Responsive design
+
+6) about page
+
+7) popravi contact page (ne radi slanje maila)
+
+8) Mozda checkout page
+
+9) Mozda login page i prema tome menjati navbar

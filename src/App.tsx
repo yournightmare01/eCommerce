@@ -7,7 +7,6 @@ import Collections from './pages/Collections';
 import Layout from './components/Layout/Layout';
 import Items from './pages/Items';
 import NotFound from './pages/NotFound';
-import { CollectionData } from './components/collections/CollectionItems';
 
 function App() {
   return (
@@ -24,7 +23,7 @@ function App() {
             <Collections />
           </Route>
           <Route path='/collections/:itemId'>
-            <Items items={CollectionData} />
+            <Items />
           </Route>
           <Route path='/contact'>
             <Contact />
