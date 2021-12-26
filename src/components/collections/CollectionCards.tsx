@@ -37,7 +37,6 @@ const CollectionCards = () => {
     dispatch(getProductData());
   }, [dispatch]);
 
-  console.log(apiLink);
   return (
     <Fragment>
       <div className={classes.filterNav}>

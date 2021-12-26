@@ -29,17 +29,25 @@ export const getProductData = createAsyncThunk('productData', async () => {
 interface DataState {
   productData: any;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  apiLink: string;
 }
 
 const initialState: DataState = {
   productData: [],
   loading: 'idle',
+  apiLink:
+    'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15',
 };
 
 const productDataSlice = createSlice({
   name: 'productData',
   initialState,
   reducers: {
+    sort: (state) => {
+      state.apiLink = state.apiLink
+        ? state.apiLink + '&sort_on=price&sort_order=desc'
+        : state.apiLink + '&sort_on=price&sort_order=asc';
+    },
     start(state: any) {
       state.status = 'loading';
     },
