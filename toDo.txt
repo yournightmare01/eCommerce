@@ -2,16 +2,18 @@
 
 2) ostatak filtera napraviti da rade
 
-3) "add to cart" dugme dodaje u korpu stvari
+3) "observer" kad dodjemo do kraj stranice da se doda limit koji trebamo da cuvamo u const i dodamo + 15 na offset u link
 
-4) + i - pored "add to cart" da rade
+4) "add to cart" dugme dodaje u korpu stvari
 
-5) Responsive design
+5) + i - pored "add to cart" da rade
 
-6) about page
+6) Responsive design
 
-7) popravi contact page (ne radi slanje maila)
+7) about page
 
-8) Mozda checkout page
+8) popravi contact page (ne radi slanje maila)
 
-9) Mozda login page i prema tome menjati navbar
+9) Mozda checkout page
+
+10) Mozda login page i prema tome menjati navbar
