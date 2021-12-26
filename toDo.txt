@@ -1,4 +1,4 @@
-1) sorting da radi asc/desc (verovatno mora sa redux state da se menja link)
+✅ 1) sorting da radi asc/desc (verovatno mora sa redux state da se menja link) 
 
 2) ostatak filtera napraviti da rade
 
@@ -12,7 +12,7 @@
 
 7) about page
 
-8) popravi contact page (ne radi slanje maila)
+✅ 8) popravi contact page (ne radi slanje maila)
 
 9) Mozda checkout page
 

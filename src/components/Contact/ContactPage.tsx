@@ -79,7 +79,7 @@ const Contact = (props: any) => {
 
     emailjs
       .sendForm(
-        'service_2fo7wlq',
+        'service_p2rj43o',
         'template_tni32te',
         form.current,
         'user_yxlB9jsBIB4hr8akK898b'
