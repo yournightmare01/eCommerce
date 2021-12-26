@@ -53,10 +53,10 @@ const Slider = () => {
           clickable: true,
         }}
       >
-        {product[0].images.map((arg) => {
+        {product[0].images.map((img) => {
           return (
-            <SwiperSlide>
-              <img src={arg.url_570xN} alt='' />
+            <SwiperSlide key={img.listing_image_id}>
+              <img src={img.url_570xN} alt='' />
             </SwiperSlide>
           );
         })}
@@ -68,10 +68,10 @@ const Slider = () => {
         slidesPerView={4}
         onSwiper={setThumbsSwiper}
       >
-        {product[0].images.map((arg) => {
+        {product[0].images.map((img) => {
           return (
-            <SwiperSlide>
-              <img src={arg.url_170x135} alt='' />
+            <SwiperSlide key={img.listing_image_id}>
+              <img src={img.url_170x135} alt='' />
             </SwiperSlide>
           );
         })}

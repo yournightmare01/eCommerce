@@ -23,7 +23,7 @@ const Items: React.FC = () => {
       {productData.map((item: any) => {
         if (item.listing_id === +params.itemId) {
           return (
-            <div className={classes.container}>
+            <div className={classes.container} key={item.listing_id}>
               <div className={classes.left}>
                 <Slider />
               </div>

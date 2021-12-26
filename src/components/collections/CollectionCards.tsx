@@ -6,6 +6,7 @@ import { ArrowDownIcon } from '../icons';
 import { Link } from 'react-router-dom';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getApiLink } from '../../helper/getApiLink';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
 const collection = [
@@ -16,8 +17,6 @@ const collection = [
 ];
 const discountSort = [{ option: 'Ascending' }, { option: 'Descending' }];
 const type = [{ option: 'Sneakers' }, { option: 'Shoes' }, { option: 'Boots' }];
-export let apiLink =
-  'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15';
 
 const CollectionCards = () => {
   const [isGenderClicked, setIsGenderClicked] = useState(false);
@@ -25,19 +24,21 @@ const CollectionCards = () => {
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
   const [isTypeClicked, setIsTypeClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
-  // const [apiLink, setApiLink] = useState(
-  //   'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15'
-  // );
+  const [sort, setSort] = useState<'asc' | 'desc' | ''>('');
+  const [apiLink, setApiLink] = useState(getApiLink());
   let discount = 10;
 
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
 
   useEffect(() => {
-    dispatch(getProductData());
-  }, [dispatch]);
+    dispatch(getProductData(apiLink));
+  }, [dispatch, apiLink]);
 
-  console.log(apiLink);
+  useEffect(() => {
+    sort && setApiLink(getApiLink(sort));
+  }, [sort]);
+
   return (
     <Fragment>
       <div className={classes.filterNav}>
@@ -104,10 +105,7 @@ const CollectionCards = () => {
           <span
             onClick={() => {
               setIsSortClicked(!isSortClicked);
-              apiLink = isSortClicked
-                ? 'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15&sort_on=price&sort_order=desc'
-                : 'https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=15&sort_on=price&sort_order=asc';
-              console.log(apiLink);
+              isSortClicked ? setSort('desc') : setSort('asc');
             }}
           >
             Price
