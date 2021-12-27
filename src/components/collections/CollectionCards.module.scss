@@ -179,3 +179,16 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.relative {
+  position: relative;
+}
+
+.interesction {
+  height: 10px;
+  width: 100%;
+  background-color: transparent;
+  position: absolute;
+  z-index: -1;
+  bottom: 40rem;
+}

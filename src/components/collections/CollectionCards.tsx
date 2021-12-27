@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import classes from './CollectionCards.module.scss';
-import { Fragment } from 'react';
 import FilterModal from '../filters/Filters';
 import { ArrowDownIcon } from '../icons';
 import { Link } from 'react-router-dom';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getApiLink } from '../../helper/getApiLink';
+import { useInView } from 'react-intersection-observer';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
 const collection = [
@@ -18,7 +18,7 @@ const collection = [
 const discountSort = [{ option: 'Ascending' }, { option: 'Descending' }];
 const type = [{ option: 'Sneakers' }, { option: 'Shoes' }, { option: 'Boots' }];
 
-const CollectionCards = () => {
+const CollectionCards: React.FC = () => {
   const [isGenderClicked, setIsGenderClicked] = useState(false);
   const [isCollectionClicked, setIsCollectionClicked] = useState(false);
   const [isDiscountClicked, setIsDiscountClicked] = useState(false);
@@ -26,7 +26,10 @@ const CollectionCards = () => {
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [sort, setSort] = useState<'asc' | 'desc' | ''>('');
   const [apiLink, setApiLink] = useState(getApiLink());
+  const [limit, setLimit] = useState(20);
   let discount = 10;
+
+  const [ref, inView] = useInView();
 
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
@@ -39,8 +42,17 @@ const CollectionCards = () => {
     sort && setApiLink(getApiLink(sort));
   }, [sort]);
 
+  useEffect(() => {
+    if (inView) {
+      console.log(limit);
+      setApiLink(getApiLink(sort ? sort : undefined, limit));
+      setLimit(limit + 15);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
   return (
-    <Fragment>
+    <div className={classes.relative}>
       <div className={classes.filterNav}>
         <div className={classes.filterContainer}>
           <div className={classes.filterDiv}>
@@ -141,7 +153,8 @@ const CollectionCards = () => {
           );
         })}
       </div>
-    </Fragment>
+      <div ref={ref} className={classes.interesction}></div>
+    </div>
   );
 };
 

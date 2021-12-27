@@ -1,4 +1,4 @@
-export const getApiLink = (sort?: 'asc' | 'desc', limit = 15) => {
+export const getApiLink = (sort?: 'asc' | 'desc', limit = 20) => {
   const sortExt = sort
     ? sort === 'asc'
       ? '&sort_on=price&sort_order=asc'
