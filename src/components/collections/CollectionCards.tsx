@@ -34,6 +34,8 @@ const CollectionCards: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
 
+  const loadingStatus = useAppSelector((state) => state.productData);
+
   useEffect(() => {
     dispatch(getProductData(apiLink));
   }, [dispatch, apiLink]);
@@ -44,7 +46,10 @@ const CollectionCards: React.FC = () => {
 
   useEffect(() => {
     if (inView) {
-      console.log(limit);
+      if (limit > 100) {
+        setLimit(100);
+        return;
+      }
       setApiLink(getApiLink(sort ? sort : undefined, limit));
       setLimit(limit + 15);
     }
@@ -154,6 +159,14 @@ const CollectionCards: React.FC = () => {
         })}
       </div>
       <div ref={ref} className={classes.interesction}></div>
+      {limit < 101 && loadingStatus.status === 'loading' && (
+        <div className={classes['lds-ellipsis']}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
     </div>
   );
 };

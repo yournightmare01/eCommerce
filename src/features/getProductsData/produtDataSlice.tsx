@@ -31,29 +31,18 @@ export const getProductData = createAsyncThunk(
 
 interface DataState {
   productData: any;
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
 const initialState: DataState = {
   productData: [],
-  loading: 'idle',
+  status: 'idle',
 };
 
 const productDataSlice = createSlice({
   name: 'productData',
   initialState,
-  reducers: {
-    start(state: any) {
-      state.status = 'loading';
-    },
-    success(state: any, action) {
-      state.productData = action.payload;
-      state.status = 'success';
-    },
-    fail(state: any) {
-      state.status = 'failed';
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder.addCase(getProductData.pending, (state: any) => {
