@@ -19,14 +19,16 @@ const discountSort = [{ option: 'Ascending' }, { option: 'Descending' }];
 const type = [{ option: 'Sneakers' }, { option: 'Shoes' }, { option: 'Boots' }];
 
 const CollectionCards: React.FC = () => {
-  const [isGenderClicked, setIsGenderClicked] = useState(false);
-  const [isCollectionClicked, setIsCollectionClicked] = useState(false);
-  const [isDiscountClicked, setIsDiscountClicked] = useState(false);
-  const [isTypeClicked, setIsTypeClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [sort, setSort] = useState<'asc' | 'desc' | ''>('');
   const [apiLink, setApiLink] = useState(getApiLink());
   const [limit, setLimit] = useState(20);
+
+  const [isModalHidden, setIsModalHidden] = useState(true);
+  const [isModalHidden2, setIsModalHidden2] = useState(true);
+  const [isModalHidden3, setIsModalHidden3] = useState(true);
+  const [isModalHidden4, setIsModalHidden4] = useState(true);
+
   let discount = 10;
 
   const [ref, inView] = useInView();
@@ -56,66 +58,80 @@ const CollectionCards: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
+  const showHandler = () => {
+    setIsModalHidden(!isModalHidden);
+  };
+
+  const showHandler2 = () => {
+    setIsModalHidden2(!isModalHidden2);
+  };
+  const showHandler3 = () => {
+    setIsModalHidden3(!isModalHidden3);
+  };
+
+  const showHandler4 = () => {
+    setIsModalHidden4(!isModalHidden4);
+  };
+
   return (
     <div className={classes.relative}>
       <div className={classes.filterNav}>
         <div className={classes.filterContainer}>
           <div className={classes.filterDiv}>
-            <div
-              onClick={() => setIsGenderClicked(!isGenderClicked)}
-              className={classes['filter-button']}
-            >
+            <div onClick={showHandler} className={classes['filter-button']}>
               <h4> Filter by gender</h4>
               <ArrowDownIcon />
             </div>
-            {isGenderClicked && (
-              <div className={`${classes.categoryContainer} `}>
-                <FilterModal filterArray={gender} />
-              </div>
-            )}
+            <div
+              className={`${classes.categoryContainer} ${
+                isModalHidden && classes.hideModal1
+              }`}
+            >
+              <FilterModal filterArray={gender} />
+            </div>
           </div>
 
           <div className={classes.filterDiv}>
-            <div
-              onClick={() => setIsCollectionClicked(!isCollectionClicked)}
-              className={classes['filter-button']}
-            >
+            <div onClick={showHandler2} className={classes['filter-button']}>
               <h4>Filter by collection</h4>
               <ArrowDownIcon />
             </div>
-            {isCollectionClicked && (
-              <div className={`${classes.categoryContainer}`}>
-                <FilterModal filterArray={collection} />
-              </div>
-            )}
+
+            <div
+              className={`${classes.categoryContainer} ${
+                isModalHidden2 && classes.hideModal2
+              }`}
+            >
+              <FilterModal filterArray={collection} />
+            </div>
           </div>
           <div className={classes.filterDiv}>
-            <div
-              onClick={() => setIsDiscountClicked(!isDiscountClicked)}
-              className={classes['filter-button']}
-            >
+            <div onClick={showHandler3} className={classes['filter-button']}>
               <h4>Filter by discount</h4>
               <ArrowDownIcon />
             </div>
-            {isDiscountClicked && (
-              <div className={`${classes.categoryContainer}`}>
-                <FilterModal filterArray={discountSort} />
-              </div>
-            )}
+
+            <div
+              className={`${classes.categoryContainer} ${
+                isModalHidden3 && classes.hideModal3
+              }`}
+            >
+              <FilterModal filterArray={discountSort} />
+            </div>
           </div>
           <div className={classes.filterDiv}>
-            <div
-              onClick={() => setIsTypeClicked(!isTypeClicked)}
-              className={classes['filter-button']}
-            >
+            <div onClick={showHandler4} className={classes['filter-button']}>
               <h4>Filter by type</h4>
               <ArrowDownIcon />
             </div>
-            {isTypeClicked && (
-              <div className={`${classes.categoryContainer}`}>
-                <FilterModal filterArray={type} />
-              </div>
-            )}
+
+            <div
+              className={`${classes.categoryContainer} ${
+                isModalHidden4 && classes.hideModal4
+              }`}
+            >
+              <FilterModal filterArray={type} />
+            </div>
           </div>
         </div>
         <div className={classes.sortContainer}>
