@@ -3,11 +3,13 @@ import Cart from '../Cart/Cart';
 import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import avatarImg from '../../images/image-avatar.png';
+import Hamburger from '../UI/Hamburger';
 
 const MainNavigation = () => {
   return (
     <nav className={classes.nav}>
-      <div>
+      <div className={classes['nav-content']}>
+        <Hamburger />
         <LogoIcon />
         <ul>
           <li>
@@ -21,9 +23,8 @@ const MainNavigation = () => {
           </li>
         </ul>
       </div>
-      <div>
+      <div className={classes.cart}>
         <Cart />
-
         <img src={avatarImg} alt='user' />
       </div>
     </nav>

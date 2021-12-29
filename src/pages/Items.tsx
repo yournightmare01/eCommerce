@@ -52,7 +52,9 @@ const Items: React.FC = () => {
                     <div className={classes.amount}>
                       <button
                         className={classes['amount-btn']}
-                        onClick={() => setAmout(amount - 1)}
+                        onClick={() => {
+                          amount === 0 ? setAmout(0) : setAmout(amount - 1);
+                        }}
                       >
                         <MinusIcon />
                       </button>

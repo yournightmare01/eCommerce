@@ -1,8 +1,10 @@
 .layout {
   display: grid;
+  width: 100%;
   margin-top: 2rem;
-  grid-template-columns: repeat(5, 26.5rem);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 3rem;
+  margin-bottom: 2rem;
 
   .cards {
     overflow: hidden;
@@ -69,7 +71,6 @@
   display: flex;
   width: 100%;
   height: 6rem;
-  // background-color: rgb(181, 163, 163);
   margin-top: 2rem;
   justify-content: space-around;
 
@@ -208,4 +209,31 @@ a {
 }
 .hideModal4 {
   display: none;
+}
+
+@media (max-width: 1500px) {
+  .layout {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1350px) {
+  .layout {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .layout {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 15rem;
+  }
 }

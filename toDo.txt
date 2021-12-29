@@ -7,7 +7,7 @@
 
 4) "add to cart" dugme dodaje u korpu stvari
 
-5) + i - pored "add to cart" da rade
+✅ 5) + i - pored "add to cart" da rade
 
 6) Responsive design
 

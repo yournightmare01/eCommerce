@@ -2,26 +2,27 @@
   width: 25px;
   height: 5px;
   border-radius: 5px;
-  background-color: var(--color-white);
+  background-color: var(--color-primary);
 }
 
 .swiper-button-next {
-  color: var(--color-white);
+  color: var(--color-primary);
 }
 .swiper-button-prev {
-  color: var(--color-white);
+  color: var(--color-primary);
 }
 
 .slider {
-  margin: 0 auto;
   display: flex;
-  align-items: center;
+  margin: 0 auto;
   width: 50rem;
-  justify-content: center;
-  overflow: hidden;
+  height: 60rem;
   flex-direction: column;
   img {
-    width: 50rem;
+    margin: 0 auto;
+    display: block;
+    max-width: 50rem;
+    max-height: 50rem;
     border-radius: 2.5rem;
   }
 }
