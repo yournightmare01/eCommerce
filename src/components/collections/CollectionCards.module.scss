@@ -18,9 +18,14 @@
     background-color: #f6f6f6;
     align-items: center;
     box-shadow: 0.2rem 0.2rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
+    transition: box-shadow 0.2s ease-in;
     white-space: nowrap;
     & > *:not(:last-child) {
       margin-bottom: 1.5rem;
+    }
+
+    &:hover {
+      box-shadow: 0.6rem 0.6rem 1.6rem -0.5rem rgba(0, 0, 0, 0.6);
     }
 
     .cost {
@@ -234,6 +239,5 @@ a {
 @media (max-width: 600px) {
   .layout {
     grid-template-columns: repeat(1, 1fr);
-    padding: 0 15rem;
   }
 }

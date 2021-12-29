@@ -3,31 +3,75 @@ import Cart from '../Cart/Cart';
 import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import avatarImg from '../../images/image-avatar.png';
-import Hamburger from '../UI/Hamburger';
+import { Fragment, useState } from 'react';
 
 const MainNavigation = () => {
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
+
   return (
-    <nav className={classes.nav}>
-      <div className={classes['nav-content']}>
-        <Hamburger />
-        <LogoIcon />
+    <Fragment>
+      <div
+        className={
+          sidebar ? `${classes.overlay} ${classes.show}` : classes.overlay
+        }
+        onClick={showSidebar}
+      />
+      <nav
+        className={
+          sidebar ? `${classes.sidebar} ${classes.active}` : classes.sidebar
+        }
+      >
+        <div className={classes.cross} onClick={showSidebar}>
+          <div className={classes.lines} />
+        </div>
         <ul>
           <li>
-            <NavLink to='/collections'>Collection</NavLink>
+            <NavLink to='/collections' onClick={showSidebar}>
+              Collection
+            </NavLink>
           </li>
           <li>
-            <NavLink to='/about'>About</NavLink>
+            <NavLink to='/about' onClick={showSidebar}>
+              About
+            </NavLink>
           </li>
           <li>
-            <NavLink to='/contact'>Contact</NavLink>
+            <NavLink to='/contact' onClick={showSidebar}>
+              Contact
+            </NavLink>
           </li>
         </ul>
-      </div>
-      <div className={classes.cart}>
-        <Cart />
-        <img src={avatarImg} alt='user' />
-      </div>
-    </nav>
+      </nav>
+
+      <nav className={classes.nav}>
+        <div className={classes['nav-content']}>
+          <div className={classes.hamburger} onClick={showSidebar}>
+            <div className={classes.lines} />
+          </div>
+
+          <LogoIcon />
+          <ul>
+            <li>
+              <NavLink to='/collections'>Collection</NavLink>
+            </li>
+            <li>
+              <NavLink to='/about'>About</NavLink>
+            </li>
+            <li>
+              <NavLink to='/contact'>Contact</NavLink>
+            </li>
+          </ul>
+        </div>
+        <div className={classes.cart}>
+          <Cart />
+          <span className={classes['nav--imageContainer']}>
+            <img src={avatarImg} alt='user' />
+          </span>
+        </div>
+      </nav>
+    </Fragment>
   );
 };
 
