@@ -118,6 +118,7 @@
     &:hover {
       cursor: pointer;
       filter: opacity(0.75);
+      transform: scale(1.5);
     }
   }
 }
@@ -157,4 +158,9 @@
   .right {
     align-items: flex-start;
   }
+}
+
+.amount-btn {
+  border: none;
+  background-color: transparent;
 }

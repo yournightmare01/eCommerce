@@ -3,13 +3,14 @@ import { useParams } from 'react-router';
 import { MinusIcon, PlusIcon, CartIcon } from '../components/icons';
 import Slider from '../components/slider/slider';
 import classes from './styles.module.scss';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { getProductData } from '../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
+  const [amount, setAmout] = useState(0);
 
   useEffect(() => {
     dispatch(getProductData());
@@ -49,9 +50,19 @@ const Items: React.FC = () => {
                   </p>
                   <div className={classes.cart}>
                     <div className={classes.amount}>
-                      <MinusIcon />
-                      <input type='text' />
-                      <PlusIcon />
+                      <button
+                        className={classes['amount-btn']}
+                        onClick={() => setAmout(amount - 1)}
+                      >
+                        <MinusIcon />
+                      </button>
+                      <span>{amount}</span>
+                      <button
+                        className={classes['amount-btn']}
+                        onClick={() => setAmout(amount + 1)}
+                      >
+                        <PlusIcon />
+                      </button>
                     </div>
 
                     <button className={classes['add-to-cart']}>

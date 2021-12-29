@@ -7,6 +7,7 @@ import { getProductData } from '../../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getApiLink } from '../../helper/getApiLink';
 import { useInView } from 'react-intersection-observer';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 const gender = [{ option: 'Man' }, { option: 'Women' }];
 const collection = [
@@ -175,14 +176,7 @@ const CollectionCards: React.FC = () => {
         })}
       </div>
       <div ref={ref} className={classes.interesction}></div>
-      {limit < 101 && loadingStatus.status === 'loading' && (
-        <div className={classes['lds-ellipsis']}>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      )}
+      {limit < 101 && loadingStatus.status === 'loading' && <LoadingSpinner />}
     </div>
   );
 };

@@ -1,15 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { CartIcon, LogoIcon } from '../icons';
+import Cart from '../Cart/Cart';
+import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import avatarImg from '../../images/image-avatar.png';
-import { useState } from 'react';
 
 const MainNavigation = () => {
-  const [shown, setIsShown] = useState(false);
-  const modalToggleHandler = () => {
-    setIsShown(!shown);
-  };
-
   return (
     <nav className={classes.nav}>
       <div>
@@ -27,25 +22,8 @@ const MainNavigation = () => {
         </ul>
       </div>
       <div>
-        <div className={classes.cart}>
-          {shown && (
-            <div className={classes['cart-open']}>
-              <div className={classes['cart-open--name']}>
-                <h3>Cart</h3>
-              </div>
-              <div className={classes['cart-open--items']}>
-                <h4>Your cart is empty.</h4>
-              </div>
-            </div>
-          )}
-          <span
-            onClick={() => {
-              modalToggleHandler();
-            }}
-          >
-            <CartIcon />
-          </span>
-        </div>
+        <Cart />
+
         <img src={avatarImg} alt='user' />
       </div>
     </nav>
