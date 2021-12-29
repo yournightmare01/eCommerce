@@ -23,8 +23,9 @@ const MainNavigation = () => {
       </div>
       <div>
         <Cart />
-
-        <img src={avatarImg} alt='user' />
+        <span className={classes['nav--imageContainer']}>
+          <img src={avatarImg} alt='user' />
+        </span>
       </div>
     </nav>
   );

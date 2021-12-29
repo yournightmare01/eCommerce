@@ -21,6 +21,11 @@
       margin-bottom: 1.5rem;
     }
 
+    &:hover {
+      box-shadow: 0.6rem 0.6rem 1.6rem -0.5rem rgba(0, 0, 0, 0.6);
+      transform: translateX(-0.6rem) translateY(-0.6rem);
+    }
+
     .cost {
       display: flex;
       align-items: center;
