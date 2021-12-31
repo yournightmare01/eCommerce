@@ -103,3 +103,35 @@
     }
   }
 }
+
+@media (max-width: 900px) {
+  .contact {
+    padding: 4rem;
+  }
+
+  .social {
+    div {
+      span {
+        width: 50%;
+        justify-content: space-between;
+        svg {
+          height: 4rem;
+          width: 4rem;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 600px) {
+  .social {
+    div {
+      span {
+        width: 80%;
+        svg {
+          height: 3.5rem;
+          width: 3.5rem;
+        }
+      }
+    }
+  }
+}

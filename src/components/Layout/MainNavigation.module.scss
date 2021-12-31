@@ -50,6 +50,11 @@
       cursor: pointer;
     }
   }
+  @media (max-width: 600px) {
+    &--imageContainer img {
+      height: 4rem;
+    }
+  }
 }
 
 .hamburger {

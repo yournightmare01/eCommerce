@@ -30,7 +30,6 @@ const Items: React.FC = () => {
               </div>
               <div className={classes.right}>
                 <div className={classes['product-detail']}>
-                  <span>Nike</span>
                   <h2>{item.title}</h2>
                   <p className={classes.description}>
                     {item.description.substring(0, 500)}...

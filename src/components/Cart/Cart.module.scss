@@ -5,6 +5,7 @@
   align-items: center;
   margin-right: 5rem;
   z-index: 10;
+
   span {
     svg {
       transition: 0.2s;
@@ -84,6 +85,19 @@
         font-weight: bold;
         margin-left: 0.5rem;
       }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .cart {
+    margin-right: 3rem;
+    position: unset;
+    &-open {
+      width: 90vw;
+      height: 25rem;
+      margin-top: 32rem;
+      left: 3vw;
     }
   }
 }

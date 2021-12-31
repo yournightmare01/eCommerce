@@ -139,8 +139,38 @@
     filter: opacity(0.75);
   }
 }
+.amount-btn {
+  border: none;
+  background-color: transparent;
+}
 
-@media only screen and (max-width: 900px) {
+@media (max-width: 1200px) {
+  .left,
+  .right {
+    display: flex;
+    width: 100%;
+    min-width: fit-content;
+    align-items: center;
+  }
+
+  .product-detail {
+    width: 40rem;
+    h2 {
+      font-size: 4rem;
+    }
+
+    .description {
+      font-size: 1.6rem;
+    }
+  }
+
+  .add-to-cart {
+    padding: 1.25rem 2rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 900px) {
   .container {
     flex-direction: column;
     align-items: center;
@@ -158,9 +188,31 @@
   .right {
     align-items: flex-start;
   }
-}
+  .product-detail {
+    width: 100%;
+    text-align: center;
 
-.amount-btn {
-  border: none;
-  background-color: transparent;
+    h2 {
+      font-size: 3rem;
+    }
+
+    .description {
+      font-size: 1.4rem;
+    }
+  }
+
+  .cart {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-to-cart {
+    margin-top: 2rem;
+    padding: 2rem 2rem;
+    width: 80%;
+  }
+
+  .cost {
+    justify-content: center;
+  }
 }
