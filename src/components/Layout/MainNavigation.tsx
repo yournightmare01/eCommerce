@@ -69,6 +69,9 @@ const MainNavigation = () => {
           <span className={classes['nav--imageContainer']}>
             <img src={avatarImg} alt='user' />
           </span>
+          <li>
+            <NavLink to='/login'>Log In</NavLink>
+          </li>
         </div>
       </nav>
     </Fragment>

@@ -1,12 +1,13 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Fragment } from 'react';
-import Login from './pages/Auth';
+import Login from './pages/Login';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Collections from './pages/Collections';
 import Layout from './components/Layout/Layout';
 import Items from './pages/Items';
 import NotFound from './pages/NotFound';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -14,10 +15,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path='/' exact>
-            <Redirect to='/collections'></Redirect>
-          </Route>
-          <Route path='/login'>
-            <Login />
+            <Redirect to='/collections' />
           </Route>
           <Route path='/collections' exact>
             <Collections />
@@ -30,6 +28,12 @@ function App() {
           </Route>
           <Route path='/about'>
             <About />
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
+          <Route path='/login'>
+            <Login />
           </Route>
           <Route path='*'>
             <NotFound />

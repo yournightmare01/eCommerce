@@ -1,12 +1,16 @@
-export const getApiLink = (sort?: 'asc' | 'desc', limit = 20) => {
-  const sortExt = sort
-    ? sort === 'asc'
+export const getApiLink = (sort?: 'asc' | 'desc' | 'created', limit = 20) => {
+  const sortExt =
+    sort === 'asc'
       ? '&sort_on=price&sort_order=asc'
-      : '&sort_on=price&sort_order=desc'
-    : null;
+      : sort === 'desc'
+      ? '&sort_on=price&sort_order=desc'
+      : sort === 'created'
+      ? '&sort_on=created&sort_order=asc'
+      : null;
 
   let apiLink = `https://openapi.etsy.com/v3/application/shops/6504049/shop-sections/listings?shop_section_ids=16265179&limit=${limit}${
     sortExt || ''
   }`;
+
   return apiLink;
 };

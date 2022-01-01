@@ -2,6 +2,7 @@ import classes from './Cart.module.scss';
 import { CartIcon } from '../icons';
 import { useState } from 'react';
 import itemImage from '../../images/itemImage.jpg';
+import Button from '../UI/Button';
 
 const Cart = () => {
   const [shown, setIsShown] = useState(false);
@@ -34,7 +35,7 @@ const Cart = () => {
               </div>
             </div>
             <div className={classes['cart-open--items--button']}>
-              <button className={classes['add-to-cart']}>Add to cart</button>
+              <Button>Checkout</Button>
             </div>
           </div>
         </div>

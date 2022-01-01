@@ -72,79 +72,6 @@
   }
 }
 
-.filterNav {
-  display: flex;
-  width: 100%;
-  height: 6rem;
-  margin-top: 2rem;
-  justify-content: space-around;
-
-  .filters {
-    width: 40%;
-    display: flex;
-    flex-direction: row;
-  }
-
-  .filterContainer {
-    display: flex;
-    width: 70rem;
-    justify-content: space-evenly;
-  }
-
-  .filterDiv {
-    display: flex;
-    position: relative;
-    justify-content: center;
-  }
-
-  .filter-button {
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 13.5rem;
-    height: 4rem;
-    background: linear-gradient(135deg, #ff7a14 60%, #4a4745 50%);
-    color: white;
-    svg {
-      fill: white;
-    }
-
-    user-select: none;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .sortContainer {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .sortContainer span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0.6rem 0.4rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
-    width: 12rem;
-    height: 4.6rem;
-    -webkit-user-select: none;
-    border: 0.14rem solid var(--color-primary);
-    user-select: none;
-    font-size: 1.3rem;
-    font-weight: 500;
-    border-radius: 0.7rem;
-
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0.9rem 0.6rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
-      margin-right: 0.2rem;
-    }
-  }
-}
-
 .categoryContainer {
   margin-top: 5rem;
   width: 92%;
@@ -202,18 +129,45 @@ a {
   bottom: 40rem;
 }
 
-.hideModal1 {
-  display: none;
+.filter-container {
+  display: flex;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  width: 100%;
+  justify-content: flex-end;
 }
 
-.hideModal2 {
-  display: none;
+.filter-btn {
+  padding: 1rem 2rem;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border: none;
+  font-size: 1.6rem;
+
+  &:hover {
+    cursor: pointer;
+    filter: opacity(0.75);
+  }
 }
-.hideModal3 {
-  display: none;
-}
-.hideModal4 {
-  display: none;
+
+.dropdown {
+  position: absolute;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  box-shadow: 0.2rem 0.2rem 1rem -0.5rem rgba(0, 0, 0, 0.6);
+  background-color: white;
+  border: 1px solid #f6f6f6;
+
+  span {
+    cursor: pointer;
+    padding: 1rem 2rem;
+
+    &:hover {
+      background-color: #f6f6f6;
+    }
+  }
 }
 
 @media (max-width: 1500px) {

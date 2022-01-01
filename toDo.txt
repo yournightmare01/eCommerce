@@ -1,6 +1,6 @@
 ✅ 1) sorting da radi asc/desc (verovatno mora sa redux state da se menja link) 
 
-2) ostatak filtera napraviti da rade
+❌ 2) ostatak filtera napraviti da rade
 
 ✅ 3) "observer" kad dodjemo do kraj stranice da se doda limit koji trebamo da cuvamo u const i dodamo + 15 na offset u link
 ✅ 3.1) dodati loader kad se dodje to kraja stranice i radi fetch
@@ -9,7 +9,7 @@
 
 ✅ 5) + i - pored "add to cart" da rade
 
-6) Responsive design
+✅ 6) Responsive design
 
 7) about page
 
@@ -18,3 +18,7 @@
 9) Mozda checkout page
 
 10) Mozda login page i prema tome menjati navbar
+
+11) 404 page
+
+12) NavLink style

@@ -8,10 +8,12 @@ import { useInView } from 'react-intersection-observer';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
 const CollectionCards: React.FC = () => {
-  const [isSortClicked, setIsSortClicked] = useState(false);
-  const [sort, setSort] = useState<'asc' | 'desc' | ''>('');
+  const [sort, setSort] = useState<'asc' | 'desc' | '' | 'created'>('');
   const [apiLink, setApiLink] = useState(getApiLink());
   const [limit, setLimit] = useState(20);
+  const [filter, setFilter] = useState(false);
+
+  const showFilter = () => setFilter(!filter);
 
   let discount = 10;
 
@@ -42,25 +44,31 @@ const CollectionCards: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
+  const filterBy = (filterBy: any) => {
+    setSort(filterBy);
+    showFilter();
+  };
+
   return (
     <div className={classes.relative}>
-      <div className={classes.sortContainer}>
-        <span
-          onClick={() => {
-            setIsSortClicked(!isSortClicked);
-            isSortClicked ? setSort('desc') : setSort('asc');
-          }}
-        >
-          Price
-          {isSortClicked ? ' Ascending' : ' Descending'}
-        </span>
+      <div className={classes['filter-container']}>
+        <button className={classes['filter-btn']} onClick={showFilter}>
+          Filter {filter ? '↑' : '↓'}
+        </button>
+        {filter && (
+          <div className={classes.dropdown}>
+            <span onClick={() => filterBy('asc')}>price ascending</span>
+            <span onClick={() => filterBy('desc')}>price descending</span>
+            <span onClick={() => filterBy('created')}>newest</span>
+          </div>
+        )}
       </div>
 
       <div className={classes.layout}>
         {productData.map((item: any, i: number) => {
           return (
-            <Link to={`collections/${item.listing_id}`} key={i}>
-              <div key={Math.random()} className={classes.cards}>
+            <Link to={`collections/${item.listing_id}`} key={item.listing_id}>
+              <div className={classes.cards}>
                 <p>{item.title.substring(0, 25)}...</p>
                 <img src={item.images[0].url_170x135} alt='404' />
 
