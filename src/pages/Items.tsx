@@ -10,7 +10,9 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
-  const [amount, setAmout] = useState(0);
+  const [amount, setAmount] = useState(0);
+
+  const [fetchedData, setFetchedData] = useState([]);
 
   useEffect(() => {
     dispatch(getProductData());
@@ -18,6 +20,32 @@ const Items: React.FC = () => {
 
   const params = useParams() as { itemId: string };
   let discount = 10;
+
+  const sendData = async (fetchData: any) => {
+    await fetch(
+      'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(fetchData),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
+  };
+
+  useEffect(() => {
+    const fetchSneakers = async () => {
+      const data = await fetch(
+        'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json'
+      );
+      const response = await data.json();
+
+      setFetchedData(response);
+    };
+  }, [sendData]);
+
+  console.log(fetchedData);
 
   return (
     <Fragment>
@@ -30,7 +58,7 @@ const Items: React.FC = () => {
               </div>
               <div className={classes.right}>
                 <div className={classes['product-detail']}>
-                  <h2>{item.title}</h2>
+                  <h2>{item.title.substring(0, 50)}</h2>
                   <p className={classes.description}>
                     {item.description.substring(0, 500)}...
                   </p>
@@ -52,7 +80,7 @@ const Items: React.FC = () => {
                       <button
                         className={classes['amount-btn']}
                         onClick={() => {
-                          amount === 0 ? setAmout(0) : setAmout(amount - 1);
+                          amount === 0 ? setAmount(0) : setAmount(amount - 1);
                         }}
                       >
                         <MinusIcon />
@@ -60,13 +88,22 @@ const Items: React.FC = () => {
                       <span>{amount}</span>
                       <button
                         className={classes['amount-btn']}
-                        onClick={() => setAmout(amount + 1)}
+                        onClick={() => setAmount(amount + 1)}
                       >
                         <PlusIcon />
                       </button>
                     </div>
+                    <button
+                      onClick={() => {
+                        const itemData = {
+                          id: item.listing_id,
+                          amount,
+                        };
 
-                    <button className={classes['add-to-cart']}>
+                        sendData(itemData);
+                      }}
+                      className={classes['add-to-cart']}
+                    >
                       <CartIcon /> Add to cart
                     </button>
                   </div>
