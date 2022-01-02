@@ -1,15 +1,25 @@
 import classes from './Cart.module.scss';
 import { CartIcon } from '../icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import itemImage from '../../images/itemImage.jpg';
 import Button from '../UI/Button';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getCartItems } from '../../features/getCartItems/getCartItems';
 
 const Cart = () => {
+  const { cartItems } = useAppSelector((state) => state.cartItems);
+  const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
+
+  useEffect(() => {
+    dispatch(getCartItems());
+  }, [dispatch]);
 
   const modalToggleHandler = () => {
     setIsShown(!shown);
   };
+
+  console.log(cartItems);
 
   return (
     <div className={classes.cart}>
