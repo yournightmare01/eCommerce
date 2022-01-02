@@ -7,9 +7,11 @@ import { Fragment, useEffect, useState } from 'react';
 import { getProductData } from '../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import Button from '../components/UI/Button';
+import { getCartItems } from '../features/getCartItems/getCartItems';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { cartItems } = useAppSelector((state) => state.cartItems);
   const { productData } = useAppSelector((state) => state.productData);
   const [amount, setAmount] = useState(0);
 
@@ -85,6 +87,7 @@ const Items: React.FC = () => {
                     <Button
                       onClick={() => {
                         sendData(item.listing_id, amount);
+                        dispatch(getCartItems());
                       }}
                       className={classes['add-to-cart']}
                     >
