@@ -13,8 +13,6 @@ const Items: React.FC = () => {
   const { productData } = useAppSelector((state) => state.productData);
   const [amount, setAmount] = useState(0);
 
-  const [fetchedData, setFetchedData] = useState([]);
-
   useEffect(() => {
     dispatch(getProductData());
   }, [dispatch]);
@@ -38,30 +36,6 @@ const Items: React.FC = () => {
     );
   };
 
-  const getFetchedData = async () => {
-    const response = await fetch(
-      'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json'
-    );
-
-    if (!response.ok) {
-      throw new Error('Something went wrong!');
-    }
-
-    const responseData = await response.json();
-
-    const loadedData: any = [];
-
-    for (const key in responseData) {
-      loadedData.push({
-        id: responseData[key].id,
-        amount: responseData[key].amount,
-      });
-    }
-
-    setFetchedData(loadedData);
-  };
-
-  console.log(fetchedData);
   return (
     <Fragment>
       {productData.map((item: any) => {
@@ -111,7 +85,6 @@ const Items: React.FC = () => {
                     <Button
                       onClick={() => {
                         sendData(item.listing_id, amount);
-                        getFetchedData();
                       }}
                       className={classes['add-to-cart']}
                     >
