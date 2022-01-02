@@ -6,6 +6,7 @@ import classes from './styles.module.scss';
 import { Fragment, useEffect, useState } from 'react';
 import { getProductData } from '../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+import Button from '../components/UI/Button';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,12 +22,15 @@ const Items: React.FC = () => {
   const params = useParams() as { itemId: string };
   let discount = 10;
 
-  const sendData = async (fetchData: any) => {
+  const sendData = async (id: number, amount: number) => {
     await fetch(
       'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json',
       {
         method: 'POST',
-        body: JSON.stringify(fetchData),
+        body: JSON.stringify({
+          id,
+          amount,
+        }),
         headers: {
           'Content-type': 'application/json',
         },
@@ -34,19 +38,30 @@ const Items: React.FC = () => {
     );
   };
 
-  useEffect(() => {
-    const fetchSneakers = async () => {
-      const data = await fetch(
-        'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json'
-      );
-      const response = await data.json();
+  const getFetchedData = async () => {
+    const response = await fetch(
+      'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json'
+    );
 
-      setFetchedData(response);
-    };
-  }, [sendData]);
+    if (!response.ok) {
+      throw new Error('Something went wrong!');
+    }
+
+    const responseData = await response.json();
+
+    const loadedData: any = [];
+
+    for (const key in responseData) {
+      loadedData.push({
+        id: responseData[key].id,
+        amount: responseData[key].amount,
+      });
+    }
+
+    setFetchedData(loadedData);
+  };
 
   console.log(fetchedData);
-
   return (
     <Fragment>
       {productData.map((item: any) => {
@@ -93,19 +108,15 @@ const Items: React.FC = () => {
                         <PlusIcon />
                       </button>
                     </div>
-                    <button
+                    <Button
                       onClick={() => {
-                        const itemData = {
-                          id: item.listing_id,
-                          amount,
-                        };
-
-                        sendData(itemData);
+                        sendData(item.listing_id, amount);
+                        getFetchedData();
                       }}
                       className={classes['add-to-cart']}
                     >
                       <CartIcon /> Add to cart
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
