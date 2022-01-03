@@ -7,13 +7,16 @@ import { Fragment, useEffect, useState } from 'react';
 import { getProductData } from '../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import Button from '../components/UI/Button';
-import { getCartItems } from '../features/getCartItems/getCartItems';
+// import { getCartItems } from '../features/getCartItems/getCartItems';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { cartItems } = useAppSelector((state) => state.cartItems);
+  // const { cartItems } = useAppSelector((state) => state.cartItems);
   const { productData } = useAppSelector((state) => state.productData);
   const [amount, setAmount] = useState(0);
+  const [cardData, setCardData] = useState<any[]>([]);
+
+  const [storageData, setStorageData] = useState<any>();
 
   useEffect(() => {
     dispatch(getProductData());
@@ -22,21 +25,42 @@ const Items: React.FC = () => {
   const params = useParams() as { itemId: string };
   let discount = 10;
 
-  const sendData = async (id: number, amount: number) => {
-    await fetch(
-      'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          id,
-          amount,
-        }),
-        headers: {
-          'Content-type': 'application/json',
-        },
-      }
-    );
-  };
+  // const sendData = async (id: number, amount: number) => {
+  //   await fetch(
+  //     'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json',
+  //     {
+  //       method: 'POST',
+  //       body: JSON.stringify({
+  //         id,
+  //         amount,
+  //       }),
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //       },
+  //     }
+  //   );
+  // };
+
+  //Korisitimo nesto kao filter da nadjemo iteme koji imaju isti id, i sabiramo njihov amount
+
+  useEffect(() => {
+    const storageItem = localStorage.getItem('Item');
+
+    if (!storageItem) return;
+    const parsedItem = JSON.parse(storageItem);
+
+    setCardData(parsedItem);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('Item', JSON.stringify(cardData));
+    const itemData = localStorage.getItem('Item');
+
+    const obj = JSON.parse(itemData!);
+
+    setStorageData(itemData);
+    obj.map((item: any) => {});
+  }, [cardData]);
 
   return (
     <Fragment>
@@ -86,8 +110,20 @@ const Items: React.FC = () => {
                     </div>
                     <Button
                       onClick={() => {
-                        sendData(item.listing_id, amount);
-                        dispatch(getCartItems());
+                        cardData.filter(
+                          (item) =>
+                            item.id === +params.itemId &&
+                            setCardData(() => [
+                              { id: item.id, amount: amount + item.amount },
+                            ])
+                        );
+                        // setCardData((oldArray) => [
+                        //   ...oldArray,
+                        //   { id: item.listing_id, amount },
+                        // ]);
+
+                        // sendData(item.listing_id, amount);
+                        // dispatch(getCartItems());
                       }}
                       className={classes['add-to-cart']}
                     >

@@ -19,7 +19,7 @@ const Cart = () => {
     setIsShown(!shown);
   };
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   return (
     <div className={classes.cart}>
