@@ -15,6 +15,7 @@ const Items: React.FC = () => {
   const { productData } = useAppSelector((state) => state.productData);
   const [amount, setAmount] = useState(0);
   const [cardData, setCardData] = useState<any[]>([]);
+  const [tempNumber, setTempNumb] = useState(0);
 
   const [storageData, setStorageData] = useState<any>();
 
@@ -41,8 +42,6 @@ const Items: React.FC = () => {
   //   );
   // };
 
-  //Korisitimo nesto kao filter da nadjemo iteme koji imaju isti id, i sabiramo njihov amount
-
   useEffect(() => {
     const storageItem = localStorage.getItem('Item');
 
@@ -56,10 +55,7 @@ const Items: React.FC = () => {
     localStorage.setItem('Item', JSON.stringify(cardData));
     const itemData = localStorage.getItem('Item');
 
-    const obj = JSON.parse(itemData!);
-
     setStorageData(itemData);
-    obj.map((item: any) => {});
   }, [cardData]);
 
   return (
@@ -110,20 +106,31 @@ const Items: React.FC = () => {
                     </div>
                     <Button
                       onClick={() => {
-                        cardData.filter(
-                          (item) =>
-                            item.id === +params.itemId &&
-                            setCardData(() => [
-                              { id: item.id, amount: amount + item.amount },
-                            ])
+                        const index = cardData.findIndex(
+                          (item) => item.id === +params.itemId
                         );
-                        // setCardData((oldArray) => [
-                        //   ...oldArray,
-                        //   { id: item.listing_id, amount },
-                        // ]);
+                        if (index > -1) {
+                          //bugg se desava kad izadjes iz kartice pa se vratis i ponovo dodas amount
+                          setCardData((oldArray) => {
+                            setTempNumb(oldArray[index].amount);
+                            console.log(tempNumber);
+                            oldArray[index] = {
+                              ...oldArray[index],
+                              amount: amount + tempNumber,
+                            };
 
-                        // sendData(item.listing_id, amount);
-                        // dispatch(getCartItems());
+                            localStorage.setItem(
+                              'Item',
+                              JSON.stringify(oldArray)
+                            );
+                            return oldArray;
+                          });
+                        } else {
+                          setCardData((oldArray) => [
+                            ...oldArray,
+                            { id: item.listing_id, amount },
+                          ]);
+                        }
                       }}
                       className={classes['add-to-cart']}
                     >
