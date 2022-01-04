@@ -113,14 +113,15 @@ const Items: React.FC = () => {
                         cardData.filter(
                           (item) =>
                             item.id === +params.itemId &&
-                            setCardData(() => [
+                            setCardData((oldArray) => [
+                              ...oldArray,
                               { id: item.id, amount: amount + item.amount },
                             ])
                         );
-                        // setCardData((oldArray) => [
-                        //   ...oldArray,
-                        //   { id: item.listing_id, amount },
-                        // ]);
+                        setCardData((oldArray) => [
+                          ...oldArray,
+                          { id: item.listing_id, amount },
+                        ]);
 
                         // sendData(item.listing_id, amount);
                         // dispatch(getCartItems());
