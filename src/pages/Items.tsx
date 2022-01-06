@@ -11,7 +11,6 @@ import Button from '../components/UI/Button';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
-  // const { cartItems } = useAppSelector((state) => state.cartItems);
   const { productData } = useAppSelector((state) => state.productData);
   const [amount, setAmount] = useState(0);
   const [cardData, setCardData] = useState<any[]>([]);
@@ -128,7 +127,13 @@ const Items: React.FC = () => {
                         } else {
                           setCardData((oldArray) => [
                             ...oldArray,
-                            { id: item.listing_id, amount },
+                            {
+                              id: item.listing_id,
+                              title: item.title,
+                              image: item.images[0].url_75x75,
+                              price: item.price,
+                              amount,
+                            },
                           ]);
                         }
                       }}

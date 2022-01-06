@@ -24,7 +24,8 @@
     background-color: var(--color-white);
     border-radius: 1rem;
     width: 35rem;
-    height: 25rem;
+    min-height: 25rem;
+    height: fit-content;
     margin-top: 32rem;
     display: flex;
     flex-direction: column;

@@ -1,25 +1,30 @@
 import classes from './Cart.module.scss';
 import { CartIcon } from '../icons';
 import { useEffect, useState } from 'react';
-import itemImage from '../../images/itemImage.jpg';
 import Button from '../UI/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getCartItems } from '../../features/getCartItems/getCartItems';
+import { getProductData } from '../../features/getProductsData/produtDataSlice';
 
 const Cart = () => {
-  const { cartItems } = useAppSelector((state) => state.cartItems);
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
+  const [owo, setOwo] = useState<any[]>([]);
 
   useEffect(() => {
-    dispatch(getCartItems());
+    dispatch(getProductData());
   }, [dispatch]);
 
   const modalToggleHandler = () => {
     setIsShown(!shown);
   };
 
-  // console.log(cartItems);
+  useEffect(() => {
+    const arg = localStorage.getItem('Item');
+    if (!arg) return;
+    const uwu = JSON.parse(arg);
+    setOwo(uwu);
+  }, []);
 
   return (
     <div className={classes.cart}>
@@ -29,21 +34,35 @@ const Cart = () => {
             <h3>Cart</h3>
           </div>
           <div className={classes['cart-open--items']}>
-            {/* <h4>Your cart is empty.</h4> */}
-            <div className={classes.cart__item}>
-              <span className={classes['cart__item--imageContainer']}>
-                <img src={itemImage} alt='grr' />
-              </span>
-              <div className={classes['cart__item--text']}>
-                <span>Title</span>
-                <div>
-                  <span>Price x Amount</span>
-                  <span className={classes['cart__item--text--bold']}>
-                    Total Price
+            {owo.length === 0 && <h4>Your cart is empty.</h4>}
+            {owo.map((item: any) => {
+              return (
+                <div className={classes.cart__item} key={item.id}>
+                  <span className={classes['cart__item--imageContainer']}>
+                    <img src={item.image} alt='grr' />
                   </span>
+                  <div className={classes['cart__item--text']}>
+                    <span>{item.title.substring(0, 22)}...</span>
+                    <div>
+                      <span>
+                        {(
+                          (item.price.amount / item.price.divisor / 10) *
+                          9
+                        ).toFixed(2)}{' '}
+                        x {item.amount}
+                      </span>
+                      <span className={classes['cart__item--text--bold']}>
+                        {(
+                          (item.price.amount / item.price.divisor / 10) *
+                          9 *
+                          item.amount
+                        ).toFixed(2)}{' '}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
             <div className={classes['cart-open--items--button']}>
               <Button>Checkout</Button>
             </div>
