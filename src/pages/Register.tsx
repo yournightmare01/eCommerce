@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import Button from '../components/UI/Button';
 import { useEffect, useRef, useState } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyDapoOvzZodgxrQNtIoJpJ-58CpBNP58EQ',
   authDomain: 'ecommerce-177d7.firebaseapp.com',
   databaseURL:
@@ -23,37 +21,31 @@ const Register = () => {
   const emailInputRef = useRef<any>();
   const passwordInputRef = useRef<any>();
 
-  const emailhandler = () => {
+  const userDataHandler = () => {
     const emailValue = emailInputRef.current.value;
     const passwordValue = passwordInputRef.current.value;
     setCredentials({ email: emailValue, password: passwordValue });
-    sendToFirebase();
-    const userPassword = credentials.password;
-    const userEmail = credentials.email;
   };
 
-  const sendToFirebase = () => {
-    const userPassword = credentials.password;
-    const userEmail = credentials.email;
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  useEffect(() => {
+    initializeApp(firebaseConfig);
     const auth = getAuth();
+    const userPassword = credentials.password;
+    const userEmail = credentials.email;
 
-    createUserWithEmailAndPassword(auth, userEmail, userPassword)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        // ..
-      });
-  };
+    userPassword &&
+      createUserWithEmailAndPassword(auth, userEmail, userPassword)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          console.log(user);
+        })
+        .catch((error) => {
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
+        });
+  }, [credentials]);
 
   return (
     <Card>
@@ -61,7 +53,7 @@ const Register = () => {
       <h4>Enter your email and password you want.</h4>
       <input type='email' ref={emailInputRef} />
       <input type='password' ref={passwordInputRef} />
-      <Button onClick={emailhandler}>Register</Button>
+      <Button onClick={userDataHandler}>Register</Button>
       <Link to='/login'>Already have an account? Log in here. </Link>
     </Card>
   );
