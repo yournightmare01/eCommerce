@@ -16,8 +16,6 @@ const Items: React.FC = () => {
   const [cardData, setCardData] = useState<any[]>([]);
   const [tempNumber, setTempNumb] = useState(0);
 
-  const [storageData, setStorageData] = useState<any>();
-
   useEffect(() => {
     dispatch(getProductData());
   }, [dispatch]);
@@ -52,9 +50,6 @@ const Items: React.FC = () => {
 
   useEffect(() => {
     localStorage.setItem('Item', JSON.stringify(cardData));
-    const itemData = localStorage.getItem('Item');
-
-    setStorageData(itemData);
   }, [cardData]);
 
   return (

@@ -2,8 +2,7 @@ import classes from './Cart.module.scss';
 import { CartIcon } from '../icons';
 import { useEffect, useState } from 'react';
 import Button from '../UI/Button';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getCartItems } from '../../features/getCartItems/getCartItems';
+import { useAppDispatch } from '../../store/hooks';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 
 const Cart = () => {
