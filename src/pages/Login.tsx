@@ -38,29 +38,6 @@ const Login = () => {
         });
   }, [credentials]);
 
-  // const sendToFirebase = () => {
-  //   const userPassword = credentials.password;
-  //   const userEmail = credentials.email;
-  //   const app = initializeApp(firebaseConfig);
-  //   const db = getFirestore(app);
-  //   const auth = getAuth();
-
-  //   createUserWithEmailAndPassword(auth, userEmail, userPassword)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       // ...
-  //       console.log(user);
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(errorCode);
-  //       console.log(errorMessage);
-  //       // ..
-  //     });
-  // };
-
   return (
     <Card>
       <h2>Login</h2>

@@ -3,7 +3,6 @@ import { CartIcon } from '../icons';
 import { useEffect, useState } from 'react';
 import Button from '../UI/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getCartItems } from '../../features/getCartItems/getCartItems';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 
 const Cart = () => {
