@@ -158,3 +158,21 @@
 .show {
   display: block;
 }
+
+.cart {
+  display: flex;
+  align-items: center;
+
+  li {
+    list-style: none;
+
+    a {
+      font-weight: 500;
+      transition: color 0.2s ease-in;
+      margin-right: 1rem;
+      &:hover {
+        color: var(--dark-grayish-blue);
+      }
+    }
+  }
+}

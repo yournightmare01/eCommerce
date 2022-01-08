@@ -66,9 +66,9 @@ const MainNavigation = () => {
         </div>
         <div className={classes.cart}>
           <Cart />
-          <span className={classes['nav--imageContainer']}>
+          {/* <span className={classes['nav--imageContainer']}>
             <img src={avatarImg} alt='user' />
-          </span>
+          </span> */}
           <li>
             <NavLink to='/login'>Log In</NavLink>
           </li>
