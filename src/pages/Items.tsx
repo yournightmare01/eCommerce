@@ -7,18 +7,24 @@ import { Fragment, useEffect, useState } from 'react';
 import { getProductData } from '../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import Button from '../components/UI/Button';
+import { addToCart } from '../features/setShiopItems/setShopItems';
 // import { getCartItems } from '../features/getCartItems/getCartItems';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
+  const { shopItems } = useAppSelector((state) => state.shopItems);
   const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
   const [tempNumber, setTempNumb] = useState(0);
 
+  // dispatch(addToCart(cardData));
+
   useEffect(() => {
     dispatch(getProductData());
   }, [dispatch]);
+
+  console.log(shopItems);
 
   const params = useParams() as { itemId: string };
   let discount = 10;
@@ -114,6 +120,7 @@ const Items: React.FC = () => {
                             },
                           ]);
                         }
+                        dispatch(addToCart(cardData));
                       }}
                       className={classes['add-to-cart']}
                     >
@@ -131,3 +138,6 @@ const Items: React.FC = () => {
 };
 
 export default Items;
+function getShopItems(): any {
+  throw new Error('Function not implemented.');
+}

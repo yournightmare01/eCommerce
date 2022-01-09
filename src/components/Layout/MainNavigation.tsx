@@ -3,10 +3,13 @@ import Cart from '../Cart/Cart';
 import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import { Fragment, useState, useEffect } from 'react';
+import { useAppSelector } from '../../store/hooks';
 
 const MainNavigation = () => {
   const [cartItem, setCartItem] = useState<any[]>([]);
   const [sidebar, setSidebar] = useState(false);
+  const { shopItems } = useAppSelector((state) => state.shopItems);
+  console.log('main nav', shopItems);
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -93,7 +96,7 @@ const MainNavigation = () => {
         </div>
         <div className={classes.cart}>
           <Cart />
-          <span className={classes.items}>{cartItem.length}</span>
+          <span className={classes.items}>{shopItems.length}</span>
           <li>
             <NavLink to='/login'>Log In</NavLink>
           </li>

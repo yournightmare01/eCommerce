@@ -2,13 +2,15 @@ import classes from './Cart.module.scss';
 import { CartIcon, DeleteIcon } from '../icons';
 import { useEffect, useState } from 'react';
 import Button from '../UI/Button';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
   const [cartItem, setCartItem] = useState<any[]>([]);
+  const { shopItems } = useAppSelector((state) => state.shopItems);
+  console.log(shopItems);
 
   const modalToggleHandler = () => {
     setIsShown(!shown);
