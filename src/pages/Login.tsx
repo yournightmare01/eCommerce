@@ -51,7 +51,7 @@ const Login = () => {
     <Form>
       <h2>Login</h2>
       <h4>Login using your existing email and password.</h4>
-      <h4 className='error'>{error}</h4>
+      <p className='error'>{error}</p>
       <input
         ref={emailInputRef}
         type='email'

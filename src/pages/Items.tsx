@@ -16,12 +16,12 @@ const Items: React.FC = () => {
   const [cardData, setCardData] = useState<any[]>([]);
   const [tempNumber, setTempNumb] = useState(0);
 
-  const params = useParams() as { itemId: string };
-  let discount = 10;
-
   useEffect(() => {
     dispatch(getProductData());
   }, [dispatch]);
+
+  const params = useParams() as { itemId: string };
+  let discount = 10;
 
   useEffect(() => {
     const storageItem = localStorage.getItem('Item');
@@ -36,33 +36,7 @@ const Items: React.FC = () => {
     localStorage.setItem('Item', JSON.stringify(cardData));
   }, [cardData]);
 
-  const addToLocalStorage = (id: number, item: any) => {
-    const index = cardData.findIndex((item) => id === +params.itemId);
-    if (index > -1) {
-      setCardData((oldArray) => {
-        setTempNumb(oldArray[index].amount);
-        console.log(tempNumber);
-        oldArray[index] = {
-          ...oldArray[index],
-          amount: amount + tempNumber,
-        };
-
-        localStorage.setItem('Item', JSON.stringify(oldArray));
-        return oldArray;
-      });
-    } else {
-      setCardData((oldArray) => [
-        ...oldArray,
-        {
-          id: item.listing_id,
-          title: item.title,
-          image: item.images[0].url_75x75,
-          price: item.price,
-          amount,
-        },
-      ]);
-    }
-  };
+  const addToLocalStorage = () => {};
 
   return (
     <Fragment>
@@ -111,7 +85,38 @@ const Items: React.FC = () => {
                       </button>
                     </div>
                     <Button
-                      onClick={() => addToLocalStorage(item.id, item)}
+                      onClick={() => {
+                        const index = cardData.findIndex(
+                          (item) => item.id === +params.itemId
+                        );
+                        if (index > -1) {
+                          setCardData((oldArray) => {
+                            setTempNumb(oldArray[index].amount);
+                            console.log(tempNumber);
+                            oldArray[index] = {
+                              ...oldArray[index],
+                              amount: amount + tempNumber,
+                            };
+
+                            localStorage.setItem(
+                              'Item',
+                              JSON.stringify(oldArray)
+                            );
+                            return oldArray;
+                          });
+                        } else {
+                          setCardData((oldArray) => [
+                            ...oldArray,
+                            {
+                              id: item.listing_id,
+                              title: item.title,
+                              image: item.images[0].url_75x75,
+                              price: item.price,
+                              amount,
+                            },
+                          ]);
+                        }
+                      }}
                       className={classes['add-to-cart']}
                     >
                       <CartIcon /> Add to cart

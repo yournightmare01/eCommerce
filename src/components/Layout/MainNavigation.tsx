@@ -37,17 +37,29 @@ const MainNavigation = () => {
         </div>
         <ul>
           <li>
-            <NavLink to='/collections' onClick={showSidebar}>
+            <NavLink
+              to='/collections'
+              onClick={showSidebar}
+              activeClassName={classes.reee}
+            >
               Collection
             </NavLink>
           </li>
           <li>
-            <NavLink to='/about' onClick={showSidebar}>
+            <NavLink
+              to='/about'
+              onClick={showSidebar}
+              activeClassName={classes.reee}
+            >
               About
             </NavLink>
           </li>
           <li>
-            <NavLink to='/contact' onClick={showSidebar}>
+            <NavLink
+              to='/contact'
+              onClick={showSidebar}
+              activeClassName={classes.reee}
+            >
               Contact
             </NavLink>
           </li>
@@ -63,13 +75,19 @@ const MainNavigation = () => {
           <LogoIcon />
           <ul>
             <li>
-              <NavLink to='/collections'>Collection</NavLink>
+              <NavLink to='/collections' activeClassName={classes.reee}>
+                Collection
+              </NavLink>
             </li>
             <li>
-              <NavLink to='/about'>About</NavLink>
+              <NavLink to='/about' activeClassName={classes.reee}>
+                About
+              </NavLink>
             </li>
             <li>
-              <NavLink to='/contact'>Contact</NavLink>
+              <NavLink to='/contact' activeClassName={classes.reee}>
+                Contact
+              </NavLink>
             </li>
           </ul>
         </div>

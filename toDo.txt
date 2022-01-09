@@ -5,7 +5,7 @@
 ✅ 3) "observer" kad dodjemo do kraj stranice da se doda limit koji trebamo da cuvamo u const i dodamo + 15 na offset u link
 ✅ 3.1) dodati loader kad se dodje to kraja stranice i radi fetch
 
-4) "add to cart" dugme dodaje u korpu stvari
+✅ 4) "add to cart" dugme dodaje u korpu stvari
 
 ✅ 5) + i - pored "add to cart" da rade
 
@@ -17,8 +17,8 @@
 
 9) Mozda checkout page
 
-10) Mozda login page i prema tome menjati navbar
+✅ 10) Mozda login page i prema tome menjati navbar
 
-11) 404 page
+✅ 11) 404 page
 
 12) NavLink style
