@@ -25,6 +25,12 @@ const Cart = () => {
     setCartItem(localStorageItemsParsed);
   }, [localSotrageItems]);
 
+  const removeItem = () => {
+    cartItem.filter((item) => {
+      console.log(item);
+    });
+  };
+
   return (
     <div className={classes.cart}>
       {shown && (
@@ -80,6 +86,7 @@ const Cart = () => {
       <span
         onClick={() => {
           modalToggleHandler();
+          removeItem();
         }}
       >
         <CartIcon />
