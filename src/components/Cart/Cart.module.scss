@@ -26,7 +26,7 @@
     width: 35rem;
     min-height: 25rem;
     height: fit-content;
-    margin-top: 32rem;
+    top: 5rem;
     display: flex;
     flex-direction: column;
     margin-right: 12.8rem;
@@ -41,11 +41,14 @@
     }
 
     &--items {
-      height: 100%;
       padding: 2rem;
       color: var(--dark-grayish-blue);
       display: flex;
       flex-direction: column;
+
+      .empty {
+        align-self: center;
+      }
     }
   }
   &:hover {
@@ -55,6 +58,24 @@
   &__item {
     display: flex;
     margin: 1rem 0 2rem 0;
+    align-items: center;
+    position: relative;
+    &--delete {
+      align-self: flex-end;
+      position: absolute;
+      right: 0;
+      top: 2rem;
+      svg {
+        transition: fill 0.2s ease-in;
+        fill: var(--dark-grayish-blue);
+      }
+      &:hover {
+        cursor: pointer;
+        svg {
+          fill: var(--color-black);
+        }
+      }
+    }
 
     &--imageContainer img {
       width: 4rem;

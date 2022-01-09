@@ -1,5 +1,5 @@
 import classes from './Cart.module.scss';
-import { CartIcon } from '../icons';
+import { CartIcon, DeleteIcon } from '../icons';
 import { useEffect, useState } from 'react';
 import Button from '../UI/Button';
 import { useAppDispatch } from '../../store/hooks';
@@ -8,22 +8,22 @@ import { getProductData } from '../../features/getProductsData/produtDataSlice';
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
-  const [owo, setOwo] = useState<any[]>([]);
-
-  useEffect(() => {
-    dispatch(getProductData());
-  }, [dispatch]);
+  const [cartItem, setCartItem] = useState<any[]>([]);
 
   const modalToggleHandler = () => {
     setIsShown(!shown);
   };
 
   useEffect(() => {
-    const arg = localStorage.getItem('Item');
-    if (!arg) return;
-    const uwu = JSON.parse(arg);
-    setOwo(uwu);
-  }, []);
+    dispatch(getProductData());
+  }, [dispatch]);
+
+  const localSotrageItems = localStorage.getItem('Item');
+  useEffect(() => {
+    if (!localSotrageItems) return;
+    const localStorageItemsParsed = JSON.parse(localSotrageItems);
+    setCartItem(localStorageItemsParsed);
+  }, [localSotrageItems]);
 
   return (
     <div className={classes.cart}>
@@ -33,38 +33,47 @@ const Cart = () => {
             <h3>Cart</h3>
           </div>
           <div className={classes['cart-open--items']}>
-            {owo.length === 0 && <h4>Your cart is empty.</h4>}
-            {owo.map((item: any) => {
-              return (
-                <div className={classes.cart__item} key={item.id}>
-                  <span className={classes['cart__item--imageContainer']}>
-                    <img src={item.image} alt='grr' />
-                  </span>
-                  <div className={classes['cart__item--text']}>
-                    <span>{item.title.substring(0, 22)}...</span>
-                    <div>
-                      <span>
-                        {(
-                          (item.price.amount / item.price.divisor / 10) *
-                          9
-                        ).toFixed(2)}{' '}
-                        x {item.amount}
-                      </span>
-                      <span className={classes['cart__item--text--bold']}>
-                        {(
-                          (item.price.amount / item.price.divisor / 10) *
-                          9 *
-                          item.amount
-                        ).toFixed(2)}{' '}
-                      </span>
+            {cartItem.length === 0 && (
+              <h4 className={classes.empty}>Your cart is empty.</h4>
+            )}
+
+            {cartItem.length > 0 &&
+              cartItem.map((item: any) => {
+                return (
+                  <div className={classes.cart__item} key={item.id}>
+                    <span className={classes['cart__item--imageContainer']}>
+                      <img src={item.image} alt='grr' />
+                    </span>
+                    <div className={classes['cart__item--text']}>
+                      <span>{item.title.substring(0, 22)}...</span>
+                      <div>
+                        <span>
+                          {(
+                            (item.price.amount / item.price.divisor / 10) *
+                            9
+                          ).toFixed(2)}{' '}
+                          x {item.amount}
+                        </span>
+                        <span className={classes['cart__item--text--bold']}>
+                          {(
+                            (item.price.amount / item.price.divisor / 10) *
+                            9 *
+                            item.amount
+                          ).toFixed(2)}{' '}
+                        </span>
+                      </div>
+                    </div>
+                    <div className={classes['cart__item--delete']}>
+                      <DeleteIcon />
                     </div>
                   </div>
-                </div>
-              );
-            })}
-            <div className={classes['cart-open--items--button']}>
-              <Button>Checkout</Button>
-            </div>
+                );
+              })}
+            {cartItem.length > 0 && (
+              <div className={classes['cart-open--items--button']}>
+                <Button>Checkout</Button>
+              </div>
+            )}
           </div>
         </div>
       )}

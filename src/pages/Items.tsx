@@ -16,28 +16,12 @@ const Items: React.FC = () => {
   const [cardData, setCardData] = useState<any[]>([]);
   const [tempNumber, setTempNumb] = useState(0);
 
-  useEffect(() => {
-    dispatch(getProductData());
-  }, [dispatch]);
-
   const params = useParams() as { itemId: string };
   let discount = 10;
 
-  // const sendData = async (id: number, amount: number) => {
-  //   await fetch(
-  //     'https://ecommerce-177d7-default-rtdb.europe-west1.firebasedatabase.app/sneakers.json',
-  //     {
-  //       method: 'POST',
-  //       body: JSON.stringify({
-  //         id,
-  //         amount,
-  //       }),
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //     }
-  //   );
-  // };
+  useEffect(() => {
+    dispatch(getProductData());
+  }, [dispatch]);
 
   useEffect(() => {
     const storageItem = localStorage.getItem('Item');
@@ -51,6 +35,34 @@ const Items: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('Item', JSON.stringify(cardData));
   }, [cardData]);
+
+  const addToLocalStorage = (id: number, item: any) => {
+    const index = cardData.findIndex((item) => id === +params.itemId);
+    if (index > -1) {
+      setCardData((oldArray) => {
+        setTempNumb(oldArray[index].amount);
+        console.log(tempNumber);
+        oldArray[index] = {
+          ...oldArray[index],
+          amount: amount + tempNumber,
+        };
+
+        localStorage.setItem('Item', JSON.stringify(oldArray));
+        return oldArray;
+      });
+    } else {
+      setCardData((oldArray) => [
+        ...oldArray,
+        {
+          id: item.listing_id,
+          title: item.title,
+          image: item.images[0].url_75x75,
+          price: item.price,
+          amount,
+        },
+      ]);
+    }
+  };
 
   return (
     <Fragment>
@@ -99,39 +111,7 @@ const Items: React.FC = () => {
                       </button>
                     </div>
                     <Button
-                      onClick={() => {
-                        const index = cardData.findIndex(
-                          (item) => item.id === +params.itemId
-                        );
-                        if (index > -1) {
-                          //bugg se desava kad izadjes iz kartice pa se vratis i ponovo dodas amount
-                          setCardData((oldArray) => {
-                            setTempNumb(oldArray[index].amount);
-                            console.log(tempNumber);
-                            oldArray[index] = {
-                              ...oldArray[index],
-                              amount: amount + tempNumber,
-                            };
-
-                            localStorage.setItem(
-                              'Item',
-                              JSON.stringify(oldArray)
-                            );
-                            return oldArray;
-                          });
-                        } else {
-                          setCardData((oldArray) => [
-                            ...oldArray,
-                            {
-                              id: item.listing_id,
-                              title: item.title,
-                              image: item.images[0].url_75x75,
-                              price: item.price,
-                              amount,
-                            },
-                          ]);
-                        }
-                      }}
+                      onClick={() => addToLocalStorage(item.id, item)}
                       className={classes['add-to-cart']}
                     >
                       <CartIcon /> Add to cart

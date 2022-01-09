@@ -2,13 +2,22 @@ import { NavLink } from 'react-router-dom';
 import Cart from '../Cart/Cart';
 import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
-import avatarImg from '../../images/image-avatar.png';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 
 const MainNavigation = () => {
+  const [cartItem, setCartItem] = useState<any[]>([]);
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const localSotrageItems = localStorage.getItem('Item');
+
+  useEffect(() => {
+    if (!localSotrageItems) return;
+    const localStorageItemsParsed = JSON.parse(localSotrageItems);
+
+    setCartItem(localStorageItemsParsed);
+  }, [localSotrageItems]); //cartItem radi ali pravi infinite loop :)
 
   return (
     <Fragment>
@@ -66,9 +75,7 @@ const MainNavigation = () => {
         </div>
         <div className={classes.cart}>
           <Cart />
-          {/* <span className={classes['nav--imageContainer']}>
-            <img src={avatarImg} alt='user' />
-          </span> */}
+          <span className={classes.items}>{cartItem.length}</span>
           <li>
             <NavLink to='/login'>Log In</NavLink>
           </li>

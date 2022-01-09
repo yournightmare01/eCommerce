@@ -176,3 +176,17 @@
     }
   }
 }
+
+.items {
+  background-color: var(--color-primary);
+  border-radius: 50px;
+  width: 2rem;
+  text-align: center;
+  color: var(--color-white);
+  font-size: 1rem;
+  position: absolute;
+  z-index: 50;
+  margin-top: -2rem;
+  margin-left: 1rem;
+  font-weight: 500;
+}
