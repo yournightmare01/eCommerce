@@ -63,7 +63,19 @@ const Cart = () => {
                         </span>
                       </div>
                     </div>
-                    <div className={classes['cart__item--delete']}>
+                    <div
+                      className={classes['cart__item--delete']}
+                      onClick={() => {
+                        const newCartItem = cartItem.filter(
+                          (clickedItem) => clickedItem !== item
+                        );
+                        setCartItem(newCartItem);
+                        localStorage.setItem(
+                          'Item',
+                          JSON.stringify(newCartItem)
+                        );
+                      }}
+                    >
                       <DeleteIcon />
                     </div>
                   </div>

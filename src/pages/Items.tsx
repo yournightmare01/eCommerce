@@ -12,7 +12,7 @@ import Button from '../components/UI/Button';
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
   const [tempNumber, setTempNumb] = useState(0);
 
@@ -35,8 +35,6 @@ const Items: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('Item', JSON.stringify(cardData));
   }, [cardData]);
-
-  const addToLocalStorage = () => {};
 
   return (
     <Fragment>
@@ -71,7 +69,7 @@ const Items: React.FC = () => {
                       <button
                         className={classes['amount-btn']}
                         onClick={() => {
-                          amount === 0 ? setAmount(0) : setAmount(amount - 1);
+                          amount === 1 ? setAmount(1) : setAmount(amount - 1);
                         }}
                       >
                         <MinusIcon />
