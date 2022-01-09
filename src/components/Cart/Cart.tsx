@@ -25,6 +25,12 @@ const Cart = () => {
     setCartItem(localStorageItemsParsed);
   }, [localSotrageItems]);
 
+  const removeItemFromCart = (item: any) => {
+    const newCartItem = cartItem.filter((clickedItem) => clickedItem !== item);
+    setCartItem(newCartItem);
+    localStorage.setItem('Item', JSON.stringify(newCartItem));
+  };
+
   return (
     <div className={classes.cart}>
       {shown && (
@@ -65,16 +71,7 @@ const Cart = () => {
                     </div>
                     <div
                       className={classes['cart__item--delete']}
-                      onClick={() => {
-                        const newCartItem = cartItem.filter(
-                          (clickedItem) => clickedItem !== item
-                        );
-                        setCartItem(newCartItem);
-                        localStorage.setItem(
-                          'Item',
-                          JSON.stringify(newCartItem)
-                        );
-                      }}
+                      onClick={() => removeItemFromCart(item)}
                     >
                       <DeleteIcon />
                     </div>
