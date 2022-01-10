@@ -14,9 +14,8 @@ import { useAppDispatch } from './store/hooks';
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log('arg');
     dispatch(setInitialShopItems());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Fragment>

@@ -13,7 +13,9 @@ import { addToCart } from '../features/setShiopItems/setShopItems';
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
-  const { shopItems } = useAppSelector((state) => state.shopItems);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { shopItems } = useAppSelector((state) => state.shopItems); // NE BRISI PRAVI BUGG U CART
+
   const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
 
@@ -21,19 +23,17 @@ const Items: React.FC = () => {
     dispatch(getProductData());
   }, [dispatch]);
 
-  console.log(shopItems);
-
   const params = useParams() as { itemId: string };
   let discount = 10;
 
-  useEffect(() => {
-    const storageItem = localStorage.getItem('Item');
+  const storageItem = localStorage.getItem('Item');
 
+  useEffect(() => {
     if (!storageItem) return;
     const parsedItem = JSON.parse(storageItem);
 
     setCardData(parsedItem);
-  }, []);
+  }, [storageItem]);
 
   return (
     <Fragment>
@@ -88,7 +88,6 @@ const Items: React.FC = () => {
                         );
                         if (index > -1) {
                           setCardData((oldArray) => {
-                            console.log('oldArray', oldArray);
                             const newArray = [...oldArray];
                             newArray[index] = {
                               ...newArray[index],
@@ -99,12 +98,11 @@ const Items: React.FC = () => {
                               'Item',
                               JSON.stringify(newArray)
                             );
+                            dispatch(addToCart(newArray));
                             return newArray;
                           });
                         } else {
                           setCardData((oldArray) => {
-                            console.log(oldArray);
-
                             const newArray = [
                               ...oldArray,
                               {
@@ -115,15 +113,15 @@ const Items: React.FC = () => {
                                 amount,
                               },
                             ];
+
                             localStorage.setItem(
                               'Item',
                               JSON.stringify(newArray)
                             );
-
+                            dispatch(addToCart(newArray));
                             return newArray;
                           });
                         }
-                        dispatch(addToCart(cardData));
                       }}
                       className={classes['add-to-cart']}
                     >
@@ -141,6 +139,3 @@ const Items: React.FC = () => {
 };
 
 export default Items;
-function getShopItems(): any {
-  throw new Error('Function not implemented.');
-}
