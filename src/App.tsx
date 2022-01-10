@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import Login from './pages/Login';
 import Contact from './pages/Contact';
 import About from './pages/About';
@@ -8,8 +8,16 @@ import Layout from './components/Layout/Layout';
 import Items from './pages/Items';
 import NotFound from './pages/NotFound';
 import Register from './pages/Register';
+import { setInitialShopItems } from './features/setShiopItems/setShopItems';
+import { useAppDispatch } from './store/hooks';
 
 function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    console.log('arg');
+    dispatch(setInitialShopItems());
+  }, []);
+
   return (
     <Fragment>
       <Layout>

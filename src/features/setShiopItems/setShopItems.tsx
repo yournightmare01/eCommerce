@@ -4,12 +4,8 @@ interface DataState {
   shopItems: object[];
 }
 
-const arg = localStorage.getItem('Item');
-
-if (arg) var parsedArg = JSON.parse(arg);
-
 const initialState: DataState = {
-  shopItems: [...parsedArg],
+  shopItems: [],
 };
 
 export const setShopItems = createSlice({
@@ -19,9 +15,15 @@ export const setShopItems = createSlice({
     addToCart: (state, action) => {
       state.shopItems = action.payload;
     },
+    setInitialShopItems: (state) => {
+      const arg = localStorage.getItem('Item');
+      if (!arg) return;
+      const parsedArg = JSON.parse(arg);
+      state.shopItems = [...parsedArg];
+    },
   },
 });
 
-export const { addToCart } = setShopItems.actions;
+export const { addToCart, setInitialShopItems } = setShopItems.actions;
 
 export default setShopItems.reducer;
