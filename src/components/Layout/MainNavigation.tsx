@@ -8,8 +8,8 @@ import { useAppSelector } from '../../store/hooks';
 const MainNavigation = () => {
   const [cartItem, setCartItem] = useState<any[]>([]);
   const [sidebar, setSidebar] = useState(false);
-  // const { shopItems } = useAppSelector((state) => state.shopItems);
-  // console.log('main nav', shopItems);
+  const { shopItems } = useAppSelector((state) => state.shopItems);
+  console.log(shopItems);
 
   const showSidebar = () => setSidebar(!sidebar);
 

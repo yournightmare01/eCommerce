@@ -16,9 +16,6 @@ const Items: React.FC = () => {
   const { shopItems } = useAppSelector((state) => state.shopItems);
   const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
-  const [tempNumber, setTempNumb] = useState(0);
-
-  // dispatch(addToCart(cardData));
 
   useEffect(() => {
     dispatch(getProductData());
@@ -37,10 +34,6 @@ const Items: React.FC = () => {
 
     setCardData(parsedItem);
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('Item', JSON.stringify(cardData));
-  }, [cardData]);
 
   return (
     <Fragment>
@@ -95,30 +88,40 @@ const Items: React.FC = () => {
                         );
                         if (index > -1) {
                           setCardData((oldArray) => {
-                            setTempNumb(oldArray[index].amount);
-                            console.log(tempNumber);
-                            oldArray[index] = {
-                              ...oldArray[index],
-                              amount: amount + tempNumber,
+                            console.log('oldArray', oldArray);
+                            const newArray = [...oldArray];
+                            newArray[index] = {
+                              ...newArray[index],
+                              amount: amount + oldArray[index].amount,
                             };
 
                             localStorage.setItem(
                               'Item',
-                              JSON.stringify(oldArray)
+                              JSON.stringify(newArray)
                             );
-                            return oldArray;
+                            return newArray;
                           });
                         } else {
-                          setCardData((oldArray) => [
-                            ...oldArray,
-                            {
-                              id: item.listing_id,
-                              title: item.title,
-                              image: item.images[0].url_75x75,
-                              price: item.price,
-                              amount,
-                            },
-                          ]);
+                          setCardData((oldArray) => {
+                            console.log(oldArray);
+
+                            const newArray = [
+                              ...oldArray,
+                              {
+                                id: item.listing_id,
+                                title: item.title,
+                                image: item.images[0].url_75x75,
+                                price: item.price,
+                                amount,
+                              },
+                            ];
+                            localStorage.setItem(
+                              'Item',
+                              JSON.stringify(newArray)
+                            );
+
+                            return newArray;
+                          });
                         }
                         dispatch(addToCart(cardData));
                       }}
