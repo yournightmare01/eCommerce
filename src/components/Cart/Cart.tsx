@@ -2,13 +2,15 @@ import classes from './Cart.module.scss';
 import { CartIcon, DeleteIcon } from '../icons';
 import { useEffect, useState } from 'react';
 import Button from '../UI/Button';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
   const [cartItem, setCartItem] = useState<any[]>([]);
+  // const { shopItems } = useAppSelector((state) => state.shopItems);
+  // console.log(shopItems);
 
   const modalToggleHandler = () => {
     setIsShown(!shown);
@@ -25,10 +27,10 @@ const Cart = () => {
     setCartItem(localStorageItemsParsed);
   }, [localSotrageItems]);
 
-  const removeItem = () => {
-    cartItem.filter((item) => {
-      console.log(item);
-    });
+  const removeItemFromCart = (item: any) => {
+    const newCartItem = cartItem.filter((clickedItem) => clickedItem !== item);
+    setCartItem(newCartItem);
+    localStorage.setItem('Item', JSON.stringify(newCartItem));
   };
 
   return (
@@ -71,16 +73,7 @@ const Cart = () => {
                     </div>
                     <div
                       className={classes['cart__item--delete']}
-                      onClick={() => {
-                        const newCartItem = cartItem.filter(
-                          (clickedItem) => clickedItem !== item
-                        );
-                        setCartItem(newCartItem);
-                        localStorage.setItem(
-                          'Item',
-                          JSON.stringify(newCartItem)
-                        );
-                      }}
+                      onClick={() => removeItemFromCart(item)}
                     >
                       <DeleteIcon />
                     </div>
@@ -98,7 +91,6 @@ const Cart = () => {
       <span
         onClick={() => {
           modalToggleHandler();
-          removeItem();
         }}
       >
         <CartIcon />
