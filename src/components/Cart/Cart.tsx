@@ -4,13 +4,12 @@ import { useEffect, useState } from 'react';
 import Button from '../UI/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
+import { addToCart } from '../../features/setShiopItems/setShopItems';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
-  const [cartItem, setCartItem] = useState<any[]>([]);
   const { shopItems } = useAppSelector((state) => state.shopItems);
-  console.log(shopItems);
 
   const modalToggleHandler = () => {
     setIsShown(!shown);
@@ -20,16 +19,9 @@ const Cart = () => {
     dispatch(getProductData());
   }, [dispatch]);
 
-  const localSotrageItems = localStorage.getItem('Item');
-  useEffect(() => {
-    if (!localSotrageItems) return;
-    const localStorageItemsParsed = JSON.parse(localSotrageItems);
-    setCartItem(localStorageItemsParsed);
-  }, [localSotrageItems]);
-
   const removeItemFromCart = (item: any) => {
-    const newCartItem = cartItem.filter((clickedItem) => clickedItem !== item);
-    setCartItem(newCartItem);
+    const newCartItem = shopItems.filter((clickedItem) => clickedItem !== item);
+    dispatch(addToCart(newCartItem));
     localStorage.setItem('Item', JSON.stringify(newCartItem));
   };
 
@@ -41,12 +33,12 @@ const Cart = () => {
             <h3>Cart</h3>
           </div>
           <div className={classes['cart-open--items']}>
-            {cartItem.length === 0 && (
+            {shopItems.length === 0 && (
               <h4 className={classes.empty}>Your cart is empty.</h4>
             )}
 
-            {cartItem.length > 0 &&
-              cartItem.map((item: any) => {
+            {shopItems.length > 0 &&
+              shopItems.map((item: any) => {
                 return (
                   <div className={classes.cart__item} key={item.id}>
                     <span className={classes['cart__item--imageContainer']}>
@@ -80,7 +72,7 @@ const Cart = () => {
                   </div>
                 );
               })}
-            {cartItem.length > 0 && (
+            {shopItems.length > 0 && (
               <div className={classes['cart-open--items--button']}>
                 <Button>Checkout</Button>
               </div>

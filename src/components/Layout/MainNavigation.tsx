@@ -2,25 +2,14 @@ import { NavLink } from 'react-router-dom';
 import Cart from '../Cart/Cart';
 import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
 
 const MainNavigation = () => {
-  const [cartItem, setCartItem] = useState<any[]>([]);
   const [sidebar, setSidebar] = useState(false);
   const { shopItems } = useAppSelector((state) => state.shopItems);
-  console.log(shopItems);
 
   const showSidebar = () => setSidebar(!sidebar);
-
-  const localSotrageItems = localStorage.getItem('Item');
-
-  useEffect(() => {
-    if (!localSotrageItems) return;
-    const localStorageItemsParsed = JSON.parse(localSotrageItems);
-
-    setCartItem(localStorageItemsParsed);
-  }, [localSotrageItems]); //cartItem radi ali pravi infinite loop :)
 
   return (
     <Fragment>
