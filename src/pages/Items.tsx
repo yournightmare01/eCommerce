@@ -12,7 +12,7 @@ const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { shopItems } = useAppSelector((state) => state.shopItems); // NE BRISI PRAVI BUGG U CART
+  const { shopItems } = useAppSelector((state) => state.shopItems); // NE BRISI PRAVI BUGG U CART  --- verovatno pokrece reevaluation
 
   const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
