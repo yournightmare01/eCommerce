@@ -9,6 +9,7 @@ import { addToCart } from '../../features/setShiopItems/setShopItems';
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
+
   const { shopItems } = useAppSelector((state) => state.shopItems);
 
   const modalToggleHandler = () => {
