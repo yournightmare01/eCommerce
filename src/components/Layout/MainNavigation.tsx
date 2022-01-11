@@ -4,12 +4,26 @@ import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import { Fragment, useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
+import { getAuth, signOut } from 'firebase/auth';
 
 const MainNavigation = () => {
   const [sidebar, setSidebar] = useState(false);
   const { shopItems } = useAppSelector((state) => state.shopItems);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const logout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log('SignedOut', auth);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    const currentUser = localStorage.getItem('CurrentUser');
+    console.log(currentUser);
+  };
 
   return (
     <Fragment>
@@ -85,8 +99,11 @@ const MainNavigation = () => {
         </div>
         <div className={classes.cart}>
           <Cart />
-          <span className={classes.items}>{cartItem.length}</span>
+          <span className={classes.items}>{shopItems.length}</span>
           <li>
+            <NavLink onClick={logout} to='/login'>
+              Log Out
+            </NavLink>
             <NavLink to='/login'>Log In</NavLink>
           </li>
         </div>
