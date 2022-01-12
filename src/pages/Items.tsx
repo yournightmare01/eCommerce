@@ -3,7 +3,7 @@ import { MinusIcon, PlusIcon, CartIcon } from '../components/icons';
 import Slider from '../components/slider/slider';
 import classes from './styles.module.scss';
 import { Fragment, useEffect, useState } from 'react';
-import { getProductData } from '../features/getProductsData/produtDataSlice';
+// import { getProductData } from '../features/getProductsData/produtDataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import Button from '../components/UI/Button';
 import { addToCart } from '../features/setShiopItems/setShopItems';
@@ -12,14 +12,10 @@ const Items: React.FC = () => {
   const dispatch = useAppDispatch();
   const { productData } = useAppSelector((state) => state.productData);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { shopItems } = useAppSelector((state) => state.shopItems); // NE BRISI PRAVI BUGG U CART  --- verovatno pokrece reevaluation
+  // const { shopItems } = useAppSelector((state) => state.shopItems); // NE BRISI PRAVI BUGG U CART  --- verovatno pokrece reevaluation
 
   const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
-
-  useEffect(() => {
-    dispatch(getProductData());
-  }, [dispatch]);
 
   const params = useParams() as { itemId: string };
   let discount = 10;
@@ -47,6 +43,7 @@ const Items: React.FC = () => {
         dispatch(addToCart(newArray));
         return newArray;
       });
+      // dispatch(addToCart(cardData));
     } else {
       setCardData((oldArray) => {
         const newArray = [
@@ -64,12 +61,14 @@ const Items: React.FC = () => {
         dispatch(addToCart(newArray));
         return newArray;
       });
+      // dispatch(addToCart(cardData));
     }
   };
 
   return (
     <Fragment>
       {productData.map((item: any): JSX.Element | undefined => {
+        //Postoji problem kod ovaj filter dole  {item.listing_id === +params.itemId
         return (
           <Fragment key={item.listing_id}>
             {item.listing_id === +params.itemId && (

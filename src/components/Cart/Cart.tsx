@@ -5,6 +5,7 @@ import Button from '../UI/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
 import { addToCart } from '../../features/setShiopItems/setShopItems';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -41,29 +42,34 @@ const Cart = () => {
             {shopItems.length > 0 &&
               shopItems.map((item: any) => {
                 return (
-                  <div className={classes.cart__item} key={item.id}>
-                    <span className={classes['cart__item--imageContainer']}>
-                      <img src={item.image} alt='grr' />
-                    </span>
-                    <div className={classes['cart__item--text']}>
-                      <span>{item.title.substring(0, 22)}...</span>
-                      <div>
-                        <span>
-                          {(
-                            (item.price.amount / item.price.divisor / 10) *
-                            9
-                          ).toFixed(2)}{' '}
-                          x {item.amount}
-                        </span>
-                        <span className={classes['cart__item--text--bold']}>
-                          {(
-                            (item.price.amount / item.price.divisor / 10) *
-                            9 *
-                            item.amount
-                          ).toFixed(2)}{' '}
-                        </span>
+                  <div className={classes.cart__container} key={item.id}>
+                    <Link
+                      to={`/collections/${item.id}`}
+                      className={classes.cart__item}
+                    >
+                      <span className={classes['cart__item--imageContainer']}>
+                        <img src={item.image} alt='grr' />
+                      </span>
+                      <div className={classes['cart__item--text']}>
+                        <span>{item.title.substring(0, 22)}...</span>
+                        <div>
+                          <span>
+                            {(
+                              (item.price.amount / item.price.divisor / 10) *
+                              9
+                            ).toFixed(2)}{' '}
+                            x {item.amount}
+                          </span>
+                          <span className={classes['cart__item--text--bold']}>
+                            {(
+                              (item.price.amount / item.price.divisor / 10) *
+                              9 *
+                              item.amount
+                            ).toFixed(2)}{' '}
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                     <div
                       className={classes['cart__item--delete']}
                       onClick={() => removeItemFromCart(item)}
@@ -74,9 +80,12 @@ const Cart = () => {
                 );
               })}
             {shopItems.length > 0 && (
-              <div className={classes['cart-open--items--button']}>
+              <Link
+                to='/checkout'
+                className={classes['cart-open--items--button']}
+              >
                 <Button>Checkout</Button>
-              </div>
+              </Link>
             )}
           </div>
         </div>
