@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import Register from './pages/Register';
 import { setInitialShopItems } from './features/setShiopItems/setShopItems';
 import { useAppDispatch } from './store/hooks';
+import Checkout from './pages/Checkout';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path='/about'>
             <About />
+          </Route>
+          <Route path='/checkout'>
+            <Checkout />
           </Route>
           <Route path='/register'>
             <Register />
