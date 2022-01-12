@@ -1,0 +1,20 @@
+.about {
+  display: flex;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+
+    &--left {
+      display: flex;
+    }
+    &--main {
+      display: flex;
+    }
+    &--right {
+      display: flex;
+    }
+  }
+}

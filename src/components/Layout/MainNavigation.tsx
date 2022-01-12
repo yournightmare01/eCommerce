@@ -3,12 +3,16 @@ import Cart from '../Cart/Cart';
 import { LogoIcon } from '../icons';
 import classes from './MainNavigation.module.scss';
 import { Fragment, useState } from 'react';
-import { useAppSelector } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { getAuth, signOut } from 'firebase/auth';
+import { changeLoggedIn } from '../../features/setLogin/setLogin';
 
 const MainNavigation = () => {
+  const dispatch = useAppDispatch();
   const [sidebar, setSidebar] = useState(false);
   const { shopItems } = useAppSelector((state) => state.shopItems);
+
+  const { isLoggedIn } = useAppSelector((state) => state.authCheck);
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -16,7 +20,7 @@ const MainNavigation = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        console.log('SignedOut', auth);
+        dispatch(changeLoggedIn(false));
       })
       .catch((error) => {
         console.log(error);
@@ -99,10 +103,13 @@ const MainNavigation = () => {
           <Cart />
           <span className={classes.items}>{shopItems.length}</span>
           <li>
-            <NavLink onClick={logout} to='/login'>
-              Log Out
-            </NavLink>
-            <NavLink to='/login'>Log In</NavLink>
+            {isLoggedIn && (
+              <NavLink onClick={logout} to='/login'>
+                Log Out
+              </NavLink>
+            )}
+
+            {!isLoggedIn && <NavLink to='/login'>Log In</NavLink>}
           </li>
         </div>
       </nav>

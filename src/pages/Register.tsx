@@ -44,17 +44,12 @@ const Register = () => {
     const userEmail = credentials.email;
 
     userPassword &&
-      createUserWithEmailAndPassword(auth, userEmail, userPassword)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-          console.log(user);
-        })
-        .catch((error) => {
+      createUserWithEmailAndPassword(auth, userEmail, userPassword).catch(
+        (error) => {
           const errorCode = error.code.replaceAll('-', ' ').split('auth/');
           setError(errorCode);
-        });
+        }
+      );
   }, [credentials]);
 
   return (

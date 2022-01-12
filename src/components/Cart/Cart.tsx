@@ -1,6 +1,6 @@
 import classes from './Cart.module.scss';
 import { CartIcon, DeleteIcon } from '../icons';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Button from '../UI/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getProductData } from '../../features/getProductsData/produtDataSlice';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const Cart = () => {
   const dispatch = useAppDispatch();
   const [shown, setIsShown] = useState(false);
-
+  const { isLoggedIn } = useAppSelector((state) => state.authCheck);
   const { shopItems } = useAppSelector((state) => state.shopItems);
 
   const modalToggleHandler = () => {
@@ -79,13 +79,25 @@ const Cart = () => {
                   </div>
                 );
               })}
-            {shopItems.length > 0 && (
+            {shopItems.length > 0 && isLoggedIn ? (
               <Link
+                onClick={modalToggleHandler}
                 to='/checkout'
                 className={classes['cart-open--items--button']}
               >
                 <Button>Checkout</Button>
               </Link>
+            ) : (
+              <Fragment>
+                <p>You must Login, to continue with your purchase</p>
+                <Link
+                  onClick={modalToggleHandler}
+                  to='/login'
+                  className={classes['cart-open--items--button']}
+                >
+                  <Button>Login</Button>
+                </Link>
+              </Fragment>
             )}
           </div>
         </div>

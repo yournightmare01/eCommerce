@@ -21,8 +21,8 @@ const Login = () => {
   const emailInputRef = useRef<any>();
   const passwordInputRef = useRef<any>();
   const [error, setError] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  useAppSelector((state) => console.log(state.authCheck));
+
+  const { isLoggedIn } = useAppSelector((state) => state.authCheck);
 
   const {
     value: enteredMail,
@@ -44,25 +44,20 @@ const Login = () => {
     const auth = getAuth();
     userPassword &&
       signInWithEmailAndPassword(auth, userEmail, userPassword)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-        })
         .then(
           onAuthStateChanged(auth, (user) => {
-            if (!user) setLoggedIn(true);
+            if (user) dispatch(changeLoggedIn(true));
           })
         )
         .catch((error) => {
           const errorCode = error.code.replaceAll('-', ' ').split('auth/');
           setError(errorCode);
         });
-  }, [credentials]);
+  }, [credentials, dispatch]);
 
   return (
     <Form>
-      {loggedIn ? (
+      {isLoggedIn ? (
         <Redirect to='/' />
       ) : (
         <Fragment>

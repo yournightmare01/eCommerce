@@ -19,7 +19,7 @@
 
 ✅ 10) Mozda login page
 
-11) prema login menjati navbar
+✅ 11) prema login menjati navbar
 
 ✅ 12) 404 page
 
