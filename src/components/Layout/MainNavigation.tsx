@@ -21,8 +21,6 @@ const MainNavigation = () => {
       .catch((error) => {
         console.log(error);
       });
-    const currentUser = localStorage.getItem('CurrentUser');
-    console.log(currentUser);
   };
 
   return (

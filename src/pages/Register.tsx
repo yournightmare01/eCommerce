@@ -16,6 +16,7 @@ export const firebaseConfig = {
   messagingSenderId: '273390666982',
   appId: '1:273390666982:web:371f286333ec6b60896727',
 };
+initializeApp(firebaseConfig);
 
 const isEmail = (value: any) => value.includes('@') && value.includes('.');
 
@@ -38,7 +39,6 @@ const Register = () => {
   } = useInput(isEmail);
 
   useEffect(() => {
-    initializeApp(firebaseConfig);
     const auth = getAuth();
     const userPassword = credentials.password;
     const userEmail = credentials.email;

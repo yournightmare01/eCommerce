@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useState } from 'react';
 
 interface DataState {
   shopItems: object[];

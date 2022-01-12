@@ -10,15 +10,19 @@ import { useState, useRef, useEffect, Fragment } from 'react';
 import { initializeApp } from 'firebase/app';
 import Form from '../components/UI/Form';
 import useInput from '../hooks/use-input';
+import { changeLoggedIn } from '../features/setLogin/setLogin';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const isEmail = (value: any) => value.includes('@') && value.includes('.');
 
 const Login = () => {
+  const dispatch = useAppDispatch();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const emailInputRef = useRef<any>();
   const passwordInputRef = useRef<any>();
   const [error, setError] = useState('');
-  const [redirect, setRedirect] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  useAppSelector((state) => console.log(state.authCheck));
 
   const {
     value: enteredMail,
@@ -47,7 +51,7 @@ const Login = () => {
         })
         .then(
           onAuthStateChanged(auth, (user) => {
-            if (!user) setRedirect(true);
+            if (!user) setLoggedIn(true);
           })
         )
         .catch((error) => {
@@ -58,7 +62,7 @@ const Login = () => {
 
   return (
     <Form>
-      {redirect ? (
+      {loggedIn ? (
         <Redirect to='/' />
       ) : (
         <Fragment>
