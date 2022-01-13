@@ -14,25 +14,34 @@ import 'swiper/components/navigation/navigation.min.css';
 
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
-import { getProductData } from '../../features/getProductsData/produtDataSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import './styles.scss';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination, Controller, Thumbs]);
 
 const Slider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const dispatch = useAppDispatch();
-  const { productData } = useAppSelector((state) => state.productData);
+  const [images, setImages] = useState([]);
   const params = useParams();
 
-  useEffect(() => {
-    dispatch(getProductData());
-  }, [dispatch]);
+  const fetchImages = async () => {
+    const data = await fetch(
+      `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${params.itemId}&includes=Images&`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
+        },
+      }
+    );
+    const response = await data.json();
 
-  const product = productData.filter(
-    (item) => item.listing_id === +params.itemId
-  );
+    setImages(response.results[0].images);
+  };
+
+  useEffect(() => {
+    fetchImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
 
   return (
     <div className='slider'>
@@ -41,22 +50,15 @@ const Slider = () => {
         thumbs={{ swiper: thumbsSwiper }}
         effect={'coverflow'}
         centeredSlides={true}
-        slidesPerView={window.innerWidth < 768 ? 1 : 'auto'}
-        loop={true}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-        }}
+        // loop={true}
         pagination={{
           clickable: true,
         }}
       >
-        {product[0].images.map((img) => {
+        {images.map((largeImg) => {
           return (
-            <SwiperSlide key={img.listing_image_id}>
-              <img src={img.url_570xN} alt='' />
+            <SwiperSlide key={Math.random()}>
+              <img src={largeImg.url_570xN} alt='' />
             </SwiperSlide>
           );
         })}
@@ -68,10 +70,10 @@ const Slider = () => {
         slidesPerView={4}
         onSwiper={setThumbsSwiper}
       >
-        {product[0].images.map((img) => {
+        {images.map((smallImg) => {
           return (
-            <SwiperSlide key={img.listing_image_id}>
-              <img src={img.url_170x135} alt='' />
+            <SwiperSlide key={Math.random()}>
+              <img src={smallImg.url_170x135} alt='' />
             </SwiperSlide>
           );
         })}
