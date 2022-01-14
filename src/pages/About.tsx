@@ -2,7 +2,6 @@ import classes from './About.module.scss';
 import image1 from '../images/image1.jpg';
 import image2 from '../images/image2.jpg';
 import image3 from '../images/image3.jpg';
-import image4 from '../images/image4.jpg';
 
 const About = () => {
   return (
@@ -38,7 +37,7 @@ const About = () => {
             </p>
           </span>
           <div>
-            <img src={image4} alt='arg'></img>
+            <img src={image3} alt='arg'></img>
           </div>
         </div>
 
