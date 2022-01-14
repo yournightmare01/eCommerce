@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Button from '../components/UI/Button';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import Form from '../components/UI/Form';
 import useInput from '../hooks/use-input';
+import { useAppSelector } from '../store/hooks';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDapoOvzZodgxrQNtIoJpJ-58CpBNP58EQ',
@@ -25,6 +26,8 @@ const Register = () => {
   const emailInputRef = useRef<any>();
   const passwordInputRef = useRef<any>();
   const [error, setError] = useState('');
+
+  const { isLoggedIn } = useAppSelector((state) => state.authCheck);
 
   const userDataHandler = () => {
     const emailValue = emailInputRef.current.value;
@@ -54,20 +57,30 @@ const Register = () => {
 
   return (
     <Form>
-      <h2>Register</h2>
-      <h4>Enter your email and password you want.</h4>
-      <p className='error'>{error}</p>
-      <input
-        type='email'
-        ref={emailInputRef}
-        placeholder='yourmail@gmail.com'
-        value={enteredMail}
-        onChange={mailInputChangeHandler}
-        onBlur={mailInputBlurHandler}
-      />
-      <input type='password' ref={passwordInputRef} placeholder='password' />
-      <Button onClick={userDataHandler}>Register</Button>
-      <Link to='/login'>Already have an account? Log in here. </Link>
+      {isLoggedIn ? (
+        <Redirect to='/' />
+      ) : (
+        <Fragment>
+          <h2>Register</h2>
+          <h4>Enter your email and password you want.</h4>
+          <p className='error'>{error}</p>
+          <input
+            type='email'
+            ref={emailInputRef}
+            placeholder='yourmail@gmail.com'
+            value={enteredMail}
+            onChange={mailInputChangeHandler}
+            onBlur={mailInputBlurHandler}
+          />
+          <input
+            type='password'
+            ref={passwordInputRef}
+            placeholder='password'
+          />
+          <Button onClick={userDataHandler}>Register</Button>
+          <Link to='/login'>Already have an account? Log in here. </Link>
+        </Fragment>
+      )}
     </Form>
   );
 };

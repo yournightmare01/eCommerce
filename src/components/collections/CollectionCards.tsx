@@ -15,6 +15,28 @@ const CollectionCards: React.FC = () => {
 
   const showFilter = () => setFilter(!filter);
 
+  // useEffect(() => {
+  //   const functioncall = async () => {
+  //     const res = await fetch(
+  //       'https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/detail?lang=en&productcode=0839915011&country=asia2',
+  //       {
+  //         method: 'GET',
+  //         headers: {
+  //           'x-rapidapi-host': 'apidojo-hm-hennes-mauritz-v1.p.rapidapi.com',
+  //           'x-rapidapi-key':
+  //             '8be9a1403dmshe62b28325765610p151225jsn1dce1de72678',
+  //         },
+  //       }
+  //     );
+
+  //     const data = await res.json();
+
+  //     console.log(data.product);
+  //   };
+
+  //   functioncall();
+  // }, []);
+
   let discount = 10;
 
   const [ref, inView] = useInView();

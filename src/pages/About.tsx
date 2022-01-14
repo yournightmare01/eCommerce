@@ -12,9 +12,8 @@ const About = () => {
           <div>
             <img src={image1} alt='arg'></img>
           </div>
-          <span></span>
           <span>
-            <h1>
+            <p>
               The "Sneakers" brand was created in 2021, in the atmospheric Nis,
               a district of Serbia. Since then, we become a cult meetings place
               of people who share love for good design, sneakers and street
@@ -22,13 +21,13 @@ const About = () => {
               corners of the world, locals, young individualists from all over
               the World, as well as celebrities, musicians and artists looking
               for inspiration, following the latest trends.
-            </h1>
+            </p>
           </span>
         </div>
 
         <div className={classes['about__container--main']}>
           <span>
-            <h1>
+            <p>
               The "Sneakers" brand has evolved, and in January 2022 has showed
               its new “face”, presenting rebranding, as well as new interiors
               during the dedicated #changetheimage event. Our new core
@@ -36,7 +35,7 @@ const About = () => {
               generation and local artists, making projects that support talents
               are to form the basis for the development of the SneakerStudio
               brand..
-            </h1>
+            </p>
           </span>
           <div>
             <img src={image4} alt='arg'></img>
@@ -48,11 +47,11 @@ const About = () => {
             <img src={image2} alt='arg'></img>
           </div>
           <span>
-            <h1>
+            <p>
               Our shop is full of life and positive energy of your space by
               providing creative and unique ideas. Complemented by people who
               treat their work as a passion.
-            </h1>
+            </p>
           </span>
         </div>
       </div>

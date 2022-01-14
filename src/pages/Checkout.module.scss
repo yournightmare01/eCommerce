@@ -97,3 +97,13 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .checkout {
+    flex-direction: column;
+  }
+  .continue {
+    margin-left: 0;
+    width: unset;
+  }
+}

@@ -4,20 +4,38 @@ import Slider from '../components/slider/slider';
 import classes from './styles.module.scss';
 import { Fragment, useEffect, useState } from 'react';
 // import { getProductData } from '../features/getProductsData/produtDataSlice';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useAppDispatch } from '../store/hooks';
 import Button from '../components/UI/Button';
 import { addToCart } from '../features/setShiopItems/setShopItems';
 
 const Items: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { productData } = useAppSelector((state) => state.productData);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const { shopItems } = useAppSelector((state) => state.shopItems); // NE BRISI PRAVI BUGG U CART  --- verovatno pokrece reevaluation
+  const [singleProduct, setSingleProduct] = useState([]);
+  const params = useParams() as { itemId: string };
+
+  const fetchSingleItem = async () => {
+    const data = await fetch(
+      `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${params.itemId}&includes=Images&`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
+        },
+      }
+    );
+    const response = await data.json();
+
+    setSingleProduct(response.results);
+  };
+
+  useEffect(() => {
+    fetchSingleItem();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
 
   const [amount, setAmount] = useState(1);
   const [cardData, setCardData] = useState<any[]>([]);
 
-  const params = useParams() as { itemId: string };
   let discount = 10;
 
   const storageItem = localStorage.getItem('Item');
@@ -67,63 +85,60 @@ const Items: React.FC = () => {
 
   return (
     <Fragment>
-      {productData.map((item: any): JSX.Element | undefined => {
-        //Postoji problem kod ovaj filter dole  {item.listing_id === +params.itemId
+      {singleProduct.map((item: any): JSX.Element | undefined => {
         return (
           <Fragment key={item.listing_id}>
-            {item.listing_id === +params.itemId && (
-              <div className={classes.container}>
-                <div className={classes.left}>
-                  <Slider />
-                </div>
-                <div className={classes.right}>
-                  <div className={classes['product-detail']}>
-                    <h2>{item.title.substring(0, 50)}</h2>
-                    <p className={classes.description}>
-                      {item.description.substring(0, 500)}...
-                    </p>
+            <div className={classes.container}>
+              <div className={classes.left}>
+                <Slider />
+              </div>
+              <div className={classes.right}>
+                <div className={classes['product-detail']}>
+                  <h2>{item.title.substring(0, 50)}</h2>
+                  <p className={classes.description}>
+                    {item.description.substring(0, 500)}...
+                  </p>
 
-                    <div className={classes.cost}>
-                      <p className={classes.price}>
-                        {(
-                          (item.price.amount / item.price.divisor / discount) *
-                          9
-                        ).toFixed(2)}{' '}
-                      </p>
-                      <p className={classes.discount}>{discount}%</p>
-                    </div>
-                    <p className={classes.oldPrice}>
-                      {(item.price.amount / item.price.divisor).toFixed(2)}{' '}
+                  <div className={classes.cost}>
+                    <p className={classes.price}>
+                      {(
+                        (item.price.amount / item.price.divisor / discount) *
+                        9
+                      ).toFixed(2)}{' '}
                     </p>
-                    <div className={classes.cart}>
-                      <div className={classes.amount}>
-                        <button
-                          className={classes['amount-btn']}
-                          onClick={() => {
-                            amount === 1 ? setAmount(1) : setAmount(amount - 1);
-                          }}
-                        >
-                          <MinusIcon />
-                        </button>
-                        <span>{amount}</span>
-                        <button
-                          className={classes['amount-btn']}
-                          onClick={() => setAmount(amount + 1)}
-                        >
-                          <PlusIcon />
-                        </button>
-                      </div>
-                      <Button
-                        onClick={() => createItemInCart(item)}
-                        className={classes['add-to-cart']}
+                    <p className={classes.discount}>{discount}%</p>
+                  </div>
+                  <p className={classes.oldPrice}>
+                    {(item.price.amount / item.price.divisor).toFixed(2)}{' '}
+                  </p>
+                  <div className={classes.cart}>
+                    <div className={classes.amount}>
+                      <button
+                        className={classes['amount-btn']}
+                        onClick={() => {
+                          amount === 1 ? setAmount(1) : setAmount(amount - 1);
+                        }}
                       >
-                        <CartIcon /> Add to cart
-                      </Button>
+                        <MinusIcon />
+                      </button>
+                      <span>{amount}</span>
+                      <button
+                        className={classes['amount-btn']}
+                        onClick={() => setAmount(amount + 1)}
+                      >
+                        <PlusIcon />
+                      </button>
                     </div>
+                    <Button
+                      onClick={() => createItemInCart(item)}
+                      className={classes['add-to-cart']}
+                    >
+                      <CartIcon /> Add to cart
+                    </Button>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </Fragment>
         );
       })}

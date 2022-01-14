@@ -1,5 +1,11 @@
+import classes from './NotFound.module.scss';
+
 const NotFound = () => {
-  return <h1>NOT FOUND</h1>;
+  return (
+    <div className={classes.container}>
+      <h1>PAGE NOT FOUND</h1>
+    </div>
+  );
 };
 
 export default NotFound;
