@@ -63,11 +63,10 @@ const Contact = (props: any) => {
       !enteredNameIsValid ||
       !enteredMailIsValid ||
       !enteredSubjectIsValid ||
-      !enteredMessageIsValid
+      !enteredMessageIsValid ||
+      !form.current
     )
       return;
-
-    if (!form.current) return;
 
     const id = toast.loading('Sending...', {
       position: toast.POSITION.TOP_CENTER,
@@ -189,13 +188,25 @@ const Contact = (props: any) => {
         <div>
           <h2>ZlatkoR</h2>
           <span>
-            <a href='dsa'>
+            <a
+              href='https://github.com/yournightmare01'
+              target='_blank'
+              rel='noreferrer'
+            >
               <GitHubIcon />
             </a>
-            <a href='dsa'>
+            <a
+              href='https://www.linkedin.com/in/zlatko-radenkovic-559a44140/'
+              target='_blank'
+              rel='noreferrer'
+            >
               <LinkedInIcon />
             </a>
-            <a href='dsa'>
+            <a
+              href='https://codepen.io/Di-Vader/pen/XWeGGqj'
+              target='_blank'
+              rel='noreferrer'
+            >
               <CodePenIcon />
             </a>
           </span>
