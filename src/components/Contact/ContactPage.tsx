@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import useInput from '../../hooks/use-input';
 import emailjs from 'emailjs-com';
 import classes from './Contact.module.scss';
-import { CodePenIcon, GitHubIcon, LinkedInIcon } from '../icons';
+import { CodePenIcon, GitHubIcon, LinkedInIcon, PortfolioIcon } from '../icons';
 
 const isNotEmpty = (value: any) => value.trim() !== '';
 const isEmail = (value: any) => value.includes('@') && value.includes('.');
@@ -178,11 +178,11 @@ const Contact = (props: any) => {
               <LinkedInIcon />
             </a>
             <a
-              href='https://codepen.io/your-work'
+              href='https://portfolio-marko-t.netlify.app/'
               target='_blank'
               rel='noreferrer'
             >
-              <CodePenIcon />
+              <PortfolioIcon />
             </a>
           </span>
         </div>
