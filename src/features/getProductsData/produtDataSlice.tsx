@@ -4,28 +4,10 @@ const API_LINK = getApiLink();
 export const getProductData = createAsyncThunk(
   'productData',
   async (apiLink: string = API_LINK) => {
-    const response = await fetch(apiLink, {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-      },
-    });
+    const response = await fetch('http://localhost:5000/');
 
     const data = await response.json();
-    const apiIds = data.results.map((item: any) => item.listing_id);
-
-    const fetchProductData = await fetch(
-      `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${apiIds}&includes=Images&`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-        },
-      }
-    );
-
-    const productData = await fetchProductData.json();
-    return productData.results;
+    return data;
   }
 );
 
@@ -44,7 +26,7 @@ const productDataSlice = createSlice({
   initialState,
   reducers: {},
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(getProductData.pending, (state: any) => {
       state.status = 'loading';
     });
