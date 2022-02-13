@@ -71,7 +71,9 @@ const Items: React.FC = () => {
         ];
 
         localStorage.setItem('Item', JSON.stringify(newArray));
+
         dispatch(addToCart(newArray));
+
         return newArray;
       });
       // dispatch(addToCart(cardData));
