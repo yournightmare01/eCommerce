@@ -15,15 +15,3 @@ export const getApiLink = (sort?: 'asc' | 'desc' | 'created', limit = 20) => {
 
   return apiLink;
 };
-
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     axios.get('http://localhost:5000/').then(function (response) {
-//       setData(response.data);
-//     });
-//   }, []);
-
-//   console.log(data);

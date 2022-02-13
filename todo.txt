@@ -1,0 +1,3 @@
+da kad kliknemo u cart se fetch product, a kad kliknemo item u collection umseto fetch da radi filter tu
+
+dodam let response; i posle napravim dve konstante koje ce da menjaju fetch u zavisnosti od apiLink u backend/app.js

@@ -4,7 +4,7 @@ const API_LINK = getApiLink();
 export const getProductData = createAsyncThunk(
   'productData',
   async (apiLink: string = API_LINK) => {
-    const response = await fetch('http://localhost:5000/');
+    const response = await fetch('http://localhost:5000/desc');
 
     const data = await response.json();
     return data;
