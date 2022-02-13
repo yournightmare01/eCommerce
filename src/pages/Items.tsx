@@ -14,18 +14,13 @@ const Items: React.FC = () => {
   const params = useParams() as { itemId: string };
 
   const fetchSingleItem = async () => {
-    const data = await fetch(
-      `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${params.itemId}&includes=Images&`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-        },
-      }
-    );
-    const response = await data.json();
-
-    setSingleProduct(response.results);
+    try {
+      const data = await fetch(`http://localhost:5000/${params.itemId}`);
+      const response = await data.json();
+      setSingleProduct(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -48,9 +43,9 @@ const Items: React.FC = () => {
   }, [storageItem]);
 
   const createItemInCart = (item: any) => {
-    const index = cardData.findIndex((item) => item.id === +params.itemId);
+    const index = cardData.findIndex(item => item.id === +params.itemId);
     if (index > -1) {
-      setCardData((oldArray) => {
+      setCardData(oldArray => {
         const newArray = [...oldArray];
         newArray[index] = {
           ...newArray[index],
@@ -63,7 +58,7 @@ const Items: React.FC = () => {
       });
       // dispatch(addToCart(cardData));
     } else {
-      setCardData((oldArray) => {
+      setCardData(oldArray => {
         const newArray = [
           ...oldArray,
           {

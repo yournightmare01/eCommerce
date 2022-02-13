@@ -24,18 +24,10 @@ const Slider = () => {
   const params = useParams();
 
   const fetchImages = async () => {
-    const data = await fetch(
-      `https://openapi.etsy.com/v3/application/listings/batch?listing_ids=${params.itemId}&includes=Images&`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'l3l05s3fsldandekrnr6lmxj',
-        },
-      }
-    );
+    const data = await fetch(`http://localhost:5000/${params.itemId}`);
     const response = await data.json();
 
-    setImages(response.results[0].images);
+    setImages(response[0].images);
   };
 
   useEffect(() => {
@@ -60,7 +52,7 @@ const Slider = () => {
           clickable: true,
         }}
       >
-        {images.map((largeImg) => {
+        {images.map(largeImg => {
           return (
             <SwiperSlide key={Math.random()}>
               <img src={largeImg.url_570xN} alt='' />
@@ -75,7 +67,7 @@ const Slider = () => {
         slidesPerView={4}
         onSwiper={setThumbsSwiper}
       >
-        {images.map((smallImg) => {
+        {images.map(smallImg => {
           return (
             <SwiperSlide key={Math.random()}>
               <img src={smallImg.url_170x135} alt='' />

@@ -49,8 +49,6 @@ const CollectionCards: React.FC = () => {
     showFilter();
   };
 
-  console.log(productData);
-
   return (
     <div className={classes.relative}>
       <div className={classes['filter-container']}>
